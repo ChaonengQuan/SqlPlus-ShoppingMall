@@ -1,21 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Employee</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<h1>Add an employee to the table</h1>
-<form action="#" th:action="@{/employee}" th:object="${employee}" method="post">
-    <p>First Name: <input type="text" th:field="*{firstName}" /></p>
-    <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
-    <p>Gender: <input type="text" th:field="*{gender}" /></p>
-    <p>Address: <input type="text" th:field="*{address}" /></p>
-    <p>Phone: <input type="number" th:field="*{phone}" /></p>
-    <p>Employee Group: <input type="text" th:field="*{employeeGroup}" /></p>
-    <p>Salary: <input type="number" th:field="*{salary}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-</form>
+    <h1>Add an employee to the table</h1>
+    <form action="#" th:action="@{/employee}" th:object="${employee}" method="post">
+        <p>First Name: <input type="text" th:field="*{firstName}" /></p>
+        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
+        
+        <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
+        <p>Gender: <input type="text" th:field="*{gender}" /></p>
+        <p>Address: <input type="text" th:field="*{address}" /></p>
+        <p>Phone: <input type="number" th:field="*{phone}" /></p>
+        <p>Employee Group: <input type="text" th:field="*{employeeGroup}" /></p>
+        <p>Salary: <input type="number" th:field="*{salary}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
 </body>
+
 </html>

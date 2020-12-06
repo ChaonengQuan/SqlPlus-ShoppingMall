@@ -1,19 +1,23 @@
 package csc460.SqlPlusShoppingMall;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.*;
 
 public class Employee {
 
     private int id;
-    @NotNull(message = "First Name cannot be null")
+    @NotBlank(message = "First Name cannot be blank!")
+    @Size(max=50)
     private String firstName;
-    @NotNull(message = "Last Name cannot be null")
+    @NotBlank(message = "Last Name cannot be blank!")
+    @Size(max=50)
     private String lastName;
+    @Size(max=10)
     private String gender;
+    @Size(max=100)
     private String address;
     @NotNull
     private int phone;
+    @Size(max=50)
     private String employeeGroup;
     @PositiveOrZero
     private int salary;
