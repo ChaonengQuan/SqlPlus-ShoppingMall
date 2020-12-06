@@ -17,6 +17,8 @@ public class Member {
     @NotNull
     private long phone;
     private long rewardPoint;
+    @Size(max=10)
+    private String membershipPaid;
 
     public long getId() {
         return id;
@@ -74,6 +76,14 @@ public class Member {
         this.rewardPoint = rewardPoint;
     }
 
+    public String getMembershipPaid() {
+        return membershipPaid;
+    }
+
+    public void setMembershipPaid(String membershipPaid) {
+        this.membershipPaid = membershipPaid;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -84,6 +94,7 @@ public class Member {
                 ", Address='" + Address + '\'' +
                 ", phone=" + phone +
                 ", rewardPoint=" + rewardPoint +
+                ", membershipPaid='" + membershipPaid + '\'' +
                 '}';
     }
 }

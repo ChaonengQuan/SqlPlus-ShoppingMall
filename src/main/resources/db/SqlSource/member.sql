@@ -12,6 +12,7 @@ DateOfBirth	DATE,
 Address		VARCHAR2(100),
 Phone		INTEGER		NOT NULL,
 RewardPoint	INTEGER,
+MembershipPaid  VARCHAR2(10),
 PRIMARY KEY(id)
 );
 
@@ -39,8 +40,8 @@ END;
 /*
 
 INSERT INTO chaonengquan.Member
-(FirstName, LastName, DateOfBirth, Address, Phone, RewardPoint)
+(FirstName, LastName, DateOfBirth, Address, Phone, RewardPoint, MembershipPaid)
 VALUES
-('Ice', 'Cube', TO_DATE('12/01/1996', 'MM/DD/YYYY'), 'Compton, California', 2132132133, 100);
+('Ice', 'Cube', TO_DATE('12/01/1996', 'MM/DD/YYYY'), 'Compton, California', 2132132133, 100, 'Yes');
 
 */
