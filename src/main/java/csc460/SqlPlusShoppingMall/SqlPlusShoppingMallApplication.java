@@ -15,8 +15,8 @@ public class SqlPlusShoppingMallApplication {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName(oracle.jdbc.driver.OracleDriver.class.getName());
 		ds.setUrl("jdbc:oracle:thin:@aloe.cs.arizona.edu:1521:oracle");
-		ds.setUsername("");
-		ds.setPassword("");
+		ds.setUsername("chaonengquan");
+		ds.setPassword("a6562");
 		return ds;
 	}
 
