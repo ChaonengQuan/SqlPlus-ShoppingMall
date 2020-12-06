@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/employee")
@@ -29,11 +31,14 @@ public class EmployeeController {
     }
 
     @PostMapping("")
-    public String employeeAdd(@ModelAttribute Employee employee) {
-        System.out.println(employee.toString());
-        String sql = "INSERT INTO chaonengquan.Employee (FirstName, LastName, Gender, Address, Phone, EmployeeGroup, Salary) VALUES (?, ?, ? ,? ,? ,? ,?)";
-        jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(), employee.getGender(), employee.getAddress(), employee.getPhone(), employee.getEmployeeGroup(), employee.getSalary());
-        return "resultEmployee";
+    public String employeeAdd(@Valid @ModelAttribute Employee employee, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {    //if inputs are not valid
+            return "employee";
+        } else {
+            String sql = "INSERT INTO chaonengquan.Employee (FirstName, LastName, Gender, Address, Phone, EmployeeGroup, Salary) VALUES (?, ?, ? ,? ,? ,? ,?)";
+            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(), employee.getGender(), employee.getAddress(), employee.getPhone(), employee.getEmployeeGroup(), employee.getSalary());
+            return "resultEmployee";
+        }
     }
 
 
