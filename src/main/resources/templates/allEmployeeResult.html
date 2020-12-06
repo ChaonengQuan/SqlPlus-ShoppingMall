@@ -8,8 +8,8 @@
 <body>
 <h3> Current employee in the table Employee</h3>
 <table>
-    <tr th:each="name : ${employeeList}">
-        <td th:text="${employeeList}"></td>
+    <tr th:each="employee : ${employeeList}">
+        <td th:text="${employee}"></td>
     </tr>
 </table>
 </body>

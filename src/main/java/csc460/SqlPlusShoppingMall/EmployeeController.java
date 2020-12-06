@@ -1,6 +1,7 @@
 package csc460.SqlPlusShoppingMall;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
@@ -92,9 +93,9 @@ public class EmployeeController {
                         String lastName = rs.getString("LastName");
                         String gender = rs.getString("Gender");
                         String address = rs.getString("Address");
-                        int phone = rs.getInt("Phone");
+                        long phone = rs.getLong("Phone");   //long corresponds to integer in oracle
                         String employeeGroup = rs.getString("EmployeeGroup");
-                        String salary = rs.getString("Salary");
+                        long salary = rs.getLong("Salary");
                         return (firstName + ", " + lastName + ", " + gender + ", " + address + ", " + phone + ", " + employeeGroup + ", " + salary);
                     }
                 });

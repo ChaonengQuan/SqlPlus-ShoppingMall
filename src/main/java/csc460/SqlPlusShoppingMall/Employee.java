@@ -4,7 +4,7 @@ import javax.validation.constraints.*;
 
 public class Employee {
 
-    private int id;
+    private long id;
     @NotBlank(message = "First Name cannot be blank!")
     @Size(max=50)
     private String firstName;
@@ -16,17 +16,17 @@ public class Employee {
     @Size(max=100)
     private String address;
     @NotNull
-    private int phone;
+    private long phone;
     @Size(max=50)
     private String employeeGroup;
     @PositiveOrZero
-    private int salary;
+    private long salary;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -62,11 +62,11 @@ public class Employee {
         this.address = address;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
@@ -78,11 +78,11 @@ public class Employee {
         this.employeeGroup = employeeGroup;
     }
 
-    public int getSalary() {
+    public long getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(long salary) {
         this.salary = salary;
     }
 
