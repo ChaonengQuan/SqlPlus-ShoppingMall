@@ -85,10 +85,12 @@ public class EmployeeController {
     /*--Query--*/
     @GetMapping("/allEmployee")
     public String queryResults(Model model) {
-        List<String> allEmployee = this.jdbcTemplate.query(
+        List<Employee> allEmployee = this.jdbcTemplate.query(
                 "select * from chaonengquan.Employee",
-                new RowMapper<String>() {
-                    public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                new RowMapper<Employee>() {
+                    public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Employee employee = new Employee();
+                        
                         String firstName = rs.getString("FirstName");
                         String lastName = rs.getString("LastName");
                         String gender = rs.getString("Gender");
@@ -96,7 +98,17 @@ public class EmployeeController {
                         long phone = rs.getLong("Phone");   //long corresponds to integer in oracle
                         String employeeGroup = rs.getString("EmployeeGroup");
                         long salary = rs.getLong("Salary");
-                        return (firstName + ", " + lastName + ", " + gender + ", " + address + ", " + phone + ", " + employeeGroup + ", " + salary);
+                        
+                        employee.setFirstName(firstName);
+                        employee.setLastName(lastName);
+                        employee.setGender(gender);
+                        employee.setAddress(address);
+                        employee.setPhone(phone);
+                        employee.setEmployeeGroup(employeeGroup);
+                        employee.setSalary(salary);
+
+
+                        return employee;
                     }
                 });
         model.addAttribute("employeeList", allEmployee);

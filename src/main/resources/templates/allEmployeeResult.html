@@ -1,16 +1,37 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <title>All Employee</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<h3> Current employee in the table Employee</h3>
-<table>
-    <tr th:each="employee : ${employeeList}">
-        <td th:text="${employee}"></td>
-    </tr>
-</table>
+    <center>
+        <h3> Current employee in the table Employee</h3>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>EmployeeGroup</th>
+                <th>Salary</th>
+            </tr>
+            <tr th:each="employee : ${employeeList}">
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.gender}"></td>
+                <td th:text="${employee.address}"></td>
+                <td th:text="${employee.phone}"></td>
+                <td th:text="${employee.employeeGroup}"></td>
+                <td th:text="${employee.salary}"></td>
+            </tr>
+        </table>
+
+    </center>
 </body>
+
 </html>
