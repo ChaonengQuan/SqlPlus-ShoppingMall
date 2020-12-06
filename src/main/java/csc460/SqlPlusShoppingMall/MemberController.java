@@ -71,9 +71,11 @@ public class MemberController {
     @PostMapping("/update")
     public String memberUpdate(@ModelAttribute @Valid Member member, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {    //if inputs are not valid
+            // System.out.println("!!!!!!!!!!!!!update has error!!!!");
+            // System.out.println(bindingResult.getAllErrors());
             return "updateMember";
         } else {
-            String sql = "UPDATE chaonengquan.Member SET DateOfBirth = ?, Addree = ?, RewardPoint = ?, MembershipPaid = ? WHERE FirstName = ? AND LastName = ? AND Phone = ?";
+            String sql = "UPDATE chaonengquan.Member SET DateOfBirth = ?, Address = ?, RewardPoint = ?, MembershipPaid = ? WHERE FirstName = ? AND LastName = ? AND Phone = ?";
             jdbcTemplate.update(sql, member.getDateOfBirth(), member.getAddress(), member.getRewardPoint(), member.getMembershipPaid(), member.getFirstName(), member.getLastName(), member.getPhone());
             return "updateMemberResult";
         }
