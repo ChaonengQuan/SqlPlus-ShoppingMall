@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Result Employee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<center>
+    <h1>Employee Added</h1>
+    <p th:text="'First Name: ' + ${employee.firstName}"/>
+    <p th:text="'Last Name: ' + ${employee.lastName}"/>
+    <p th:text="'Gender: ' + ${employee.gender}"/>
+    <p th:text="'Address: ' + ${employee.address}"/>
+    <p th:text="'Phone: ' + ${employee.phone}"/>
+    <p th:text="'Employee Group: ' + ${employee.employeeGroup}"/>
+    <p th:text="'Salary: ' + ${employee.salary}"/>
+    <a href="/addEmployee">Add another employee</a> <br>
+    <a href="/index.html">Home</a>
+</center>
+</body>
+</html>
