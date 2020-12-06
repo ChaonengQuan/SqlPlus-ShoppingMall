@@ -33,7 +33,6 @@ public class EmployeeController {
     @PostMapping("")
     public String employeeAdd(@ModelAttribute @Valid Employee employee, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {    //if inputs are not valid
-            System.out.println("!!!!!!!!!!!!!!!!!!!BINDING RESULT ERROR");
             return "employee";
         } else {
             String sql = "INSERT INTO chaonengquan.Employee (FirstName, LastName, Gender, Address, Phone, EmployeeGroup, Salary) VALUES (?, ?, ? ,? ,? ,? ,?)";

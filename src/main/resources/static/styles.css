@@ -1,3 +1,7 @@
 body {
     background-color: lightgreen;
 }
+
+.input_error{
+    color: red;
+}
