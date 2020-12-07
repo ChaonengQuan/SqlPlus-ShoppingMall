@@ -22,6 +22,8 @@
         <p>Category: <input type="text" th:field="*{category}"/></p>
         <p>Member Discount: <input type="int" th:field="*{memberDiscount}"/></p>
         <p>Stock Info: <input type="text" th:field="*{stockInfo}"/></p>
+
+        <!-- SupplierID has to exist before add, or find a way to add NULL value -->
         <p>Supplier ID: <input type="number" th:field="*{supplierID}"/></p>
 
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
