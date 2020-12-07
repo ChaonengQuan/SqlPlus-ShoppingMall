@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Update Supplier</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<center>
+    <h1>Update a supplier in the table</h1>
+    <form action="#" th:action="@{/supplier/update}" th:object="${supplier}" method="post">
+        <p>Supplier ID: <input type="number" th:field="*{id}"/></p>
+        <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Supplier ID Error</p>
+
+        <p>Supplier Name: <input type="text" th:field="*{name}"/></p>
+        <p class="input_error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Supplier Name Error</p>
+
+        <p>Restock Date: <input type="date" th:field="*{restockDate}"/></p>
+        <p>Supply Price: <input type="number" th:field="*{supplyPrice}"/></p>
+        <p>Amount: <input type="number" th:field="*{amount}"/></p>
+        <p>Product ID: <input type="text" th:field="*{productID}"/></p>
+
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</center>
+</body>
+
+</html>

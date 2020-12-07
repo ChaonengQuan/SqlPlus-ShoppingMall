@@ -32,8 +32,8 @@ PRIMARY KEY(id)
 /*
 
 INSERT INTO chaonengquan.Supplier
-(Name, RestockDate, SupplyPrice, Amount)
+(id, Name, RestockDate, SupplyPrice, Amount, ProductID)
 VALUES
-('Supply Dealer', TO_DATE('12/25/2020', 'MM/DD/YYYY'), 299, 10);
+(123, 'Supply Dealer', TO_DATE('12/25/2020', 'MM/DD/YYYY'), 299, 10, 1);
 
 */

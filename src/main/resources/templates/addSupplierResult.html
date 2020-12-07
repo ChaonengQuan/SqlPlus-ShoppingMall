@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Result Supplier</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<center>
+    <h1>Supplier Added</h1>
+    <p th:text="'id: ' + ${supplier.id}"/>
+    <p th:text="'Name: ' + ${supplier.name}"/>
+    <p th:text="'Restock Date: ' + ${supplier.restockDate}"/>
+    <p th:text="'Supply Price: ' + ${supplier.supplyPrice}"/>
+    <p th:text="'Amount: ' + ${supplier.amount}"/>
+    <p th:text="'ProductID: ' + ${supplier.productID}"/>
+    <a href="/supplier/add">Add another supplier</a> <br>
+    <a href="/index.html">Home</a>
+</center>
+</body>
+</html>

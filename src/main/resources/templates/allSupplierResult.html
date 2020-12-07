@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>All Supplier</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<center>
+    <h3> Current supplier in the table Supplier</h3>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Restock Date</th>
+            <th>Supply Price</th>
+            <th>Amount</th>
+            <th>Product ID</th>
+        </tr>
+        <tr th:each="supplier : ${allSupplier}">
+            <td th:text="${supplier.id}"></td>
+            <td th:text="${supplier.name}"></td>
+            <td th:text="${product.restockDate}"></td>
+            <td th:text="${product.supplyPrice}"></td>
+            <td th:text="${product.amount}"></td>
+            <td th:text="${product.productID}"></td>
+        </tr>
+    </table>
+
+</center>
+</body>
+
+</html>
