@@ -20,14 +20,14 @@
             <th>StockInfo</th>
             <th>SupplierId</th>
         </tr>
-        <tr th:each="product : ${allProdcut}">
+        <tr th:each="product : ${allProduct}">
             <td th:text="${product.id}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.retailPrice}"></td>
             <td th:text="${product.category}"></td>
             <td th:text="${product.memberDiscount}"></td>
             <td th:text="${product.stockInfo}"></td>
-            <td th:text="${product.supplierId}"></td>
+            <td th:text="${product.supplierID}"></td>
         </tr>
     </table>
 

@@ -40,16 +40,15 @@ public class ProductController {
             return "addProduct";
         } else {
             String sql = "INSERT INTO chaonengquan.Product (id, Name, RetailPrice, Category, MemberDiscount, StockInfo, SupplierID) VALUES (?, ?, ? ,? ,? ,? ,?)";
-            jdbcTemplate.update(sql, product.getId(), product.getRetailPrice(), product.getCategory(), product.getMemberDiscount(), product.getStockInfo(), product.getSupplierID());
+            jdbcTemplate.update(sql, product.getId(), product.getName(), product.getRetailPrice(), product.getCategory(), product.getMemberDiscount(), product.getStockInfo(), product.getSupplierID());
             return "addProductResult";
         }
     }
 
 
-
     @GetMapping("/all")
     public String getAllProduct(Model model) {
-        List<Product> allProdcut = this.jdbcTemplate.query(
+        List<Product> allProduct = this.jdbcTemplate.query(
                 "select * from chaonengquan.Product",
                 (rs, rowNum) -> {
                     Product product = new Product();
@@ -64,7 +63,7 @@ public class ProductController {
 
                     return product;
                 });
-        model.addAttribute("allProduct", allProdcut);
+        model.addAttribute("allProduct", allProduct);
         return "allProductResult";
     }
 

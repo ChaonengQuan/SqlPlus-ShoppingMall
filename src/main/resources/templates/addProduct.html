@@ -11,6 +11,7 @@
 <center>
     <h1>Add a product to the table</h1>
     <form action="#" th:action="@{/product/add}" th:object="${product}" method="post">
+
         <p>Product ID: <input type="number" th:field="*{id}"/></p>
         <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Product ID Error</p>
 
@@ -21,7 +22,7 @@
         <p>Category: <input type="text" th:field="*{category}"/></p>
         <p>Member Discount: <input type="int" th:field="*{memberDiscount}"/></p>
         <p>Stock Info: <input type="text" th:field="*{stockInfo}"/></p>
-        <p>Supplier ID: <input type="int" th:field="*{supplierID}"/></p>
+        <p>Supplier ID: <input type="number" th:field="*{supplierID}"/></p>
 
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
     </form>

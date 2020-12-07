@@ -1,9 +1,10 @@
 package csc460.SqlPlusShoppingMall;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 
 public class Product {
-    @NotBlank(message = "ID cannot be blank!")
+    @Positive
+    @NotNull(message = "ID cannot be blank!")
     private long id;
     @NotBlank(message = "Name cannot be blank!")
     private String name;
