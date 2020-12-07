@@ -78,7 +78,7 @@ public class SupplierController {
         }
     }
 
-    @GetMapping("/add")
+    @GetMapping("/all")
     public String getAllSupplier(Model model) {
         List<Supplier> allSupplier = this.jdbcTemplate.query(
                 "SELECT * FROM chaonengquan.Supplier",
