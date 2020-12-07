@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>All Product</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<center>
+    <h3> Current product in the table Product</h3>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Retail Price</th>
+            <th>Category</th>
+            <th>Member Discount</th>
+            <th>StockInfo</th>
+            <th>SupplierId</th>
+        </tr>
+        <tr th:each="product : ${allProdcut}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.retailPrice}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.memberDiscount}"></td>
+            <td th:text="${product.stockInfo}"></td>
+            <td th:text="${product.supplierId}"></td>
+        </tr>
+    </table>
+
+</center>
+</body>
+
+</html>

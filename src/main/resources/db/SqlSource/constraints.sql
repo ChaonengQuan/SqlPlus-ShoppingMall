@@ -29,3 +29,9 @@ ALTER TABLE chaonengquan.OrderItem
 ADD CONSTRAINT fk_ProductId
   FOREIGN KEY (ProductId)
   REFERENCES chaonengquan.Product(id);
+
+--Supplier FK
+ALTER TABLE chaonengquan.Supplier
+    ADD CONSTRAINT Supplier_fk_ProductId
+        FOREIGN KEY (ProductId)
+            REFERENCES chaonengquan.Product(id);

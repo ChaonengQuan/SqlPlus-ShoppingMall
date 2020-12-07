@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Result Product</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<center>
+
+    <h1>Product Added</h1>
+    <p th:text="'id: ' + ${product.id}"/>
+    <p th:text="'Name: ' + ${product.name}"/>
+    <p th:text="'RetailPrice: ' + ${product.retailPrice}"/>
+    <p th:text="'Categeory: ' + ${product.category}"/>
+    <p th:text="'MemberDiscount: ' + ${product.memberDiscount}"/>
+    <p th:text="'StockInfo: ' + ${product.stockInfo}"/>
+    <p th:text="'SupplierID: ' + ${product.supplierId}"/>
+
+    <a href="/product/add">Add another product</a> <br>
+    <a href="/index.html">Home</a>
+</center>
+</body>
+</html>

@@ -13,19 +13,19 @@ MemberId	INTEGER		NOT NULL,
 PRIMARY KEY(id)
 );
 
---Create sequence
-CREATE SEQUENCE salesRecord_id_sequence;
-
---create trigger
-CREATE OR REPLACE TRIGGER salesRecord_on_insert
-  BEFORE INSERT ON chaonengquan.SalesRecord
-  FOR EACH ROW
-BEGIN
-  SELECT salesRecord_id_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-/
+-- --Create sequence
+-- CREATE SEQUENCE salesRecord_id_sequence;
+--
+-- --create trigger
+-- CREATE OR REPLACE TRIGGER salesRecord_on_insert
+--   BEFORE INSERT ON chaonengquan.SalesRecord
+--   FOR EACH ROW
+-- BEGIN
+--   SELECT salesRecord_id_sequence.nextval
+--   INTO :new.id
+--   FROM dual;
+-- END;
+-- /
 
 
 --Example code to insert dummy data

@@ -16,20 +16,20 @@ MembershipPaid  VARCHAR2(10),
 PRIMARY KEY(id)
 );
 
---Create sequence
-CREATE SEQUENCE member_id_sequence;
-
-
---Create Trigger
-CREATE OR REPLACE TRIGGER member_on_insert
-  BEFORE INSERT ON chaonengquan.Member
-  FOR EACH ROW
-BEGIN
-  SELECT member_id_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-/
+-- --Create sequence
+-- CREATE SEQUENCE member_id_sequence;
+--
+--
+-- --Create Trigger
+-- CREATE OR REPLACE TRIGGER member_on_insert
+--   BEFORE INSERT ON chaonengquan.Member
+--   FOR EACH ROW
+-- BEGIN
+--   SELECT member_id_sequence.nextval
+--   INTO :new.id
+--   FROM dual;
+-- END;
+-- /
 
 
 --Grant permission for teammates

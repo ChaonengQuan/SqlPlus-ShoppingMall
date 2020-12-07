@@ -11,30 +11,30 @@ RetailPrice	FLOAT		NOT NULL,
 Category	VARCHAR2(50),
 MemberDiscount	INTEGER,
 StockInfo	VARCHAR2(50),
-SupplierID	INTEGER		NOT NULL,
+SupplierID	INTEGER,
 PRIMARY KEY(id)
 );
 
---Create sequence
-CREATE SEQUENCE product_id_sequence;
-
---Create trigger
-CREATE OR REPLACE TRIGGER product_on_insert
-  BEFORE INSERT ON chaonengquan.Product
-  FOR EACH ROW
-BEGIN
-  SELECT product_id_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-/
+-- --Create sequence
+-- CREATE SEQUENCE product_id_sequence;
+--
+-- --Create trigger
+-- CREATE OR REPLACE TRIGGER product_on_insert
+--   BEFORE INSERT ON chaonengquan.Product
+--   FOR EACH ROW
+-- BEGIN
+--   SELECT product_id_sequence.nextval
+--   INTO :new.id
+--   FROM dual;
+-- END;
+-- /
 
 --Example code to insert dummy data
 /*
 
 INSERT INTO chaonengquan.Product
-(Name, RetailPrice, Category, MemberDiscount, StockInfo, SupplierID)
+(id, Name, RetailPrice, Category, MemberDiscount, StockInfo, SupplierID)
 VALUES
-('iPhone6', 500, 'Electronic', 20 , 'In Stock', 1);
+(44, 'iPhone6', 500, 'Electronic', 20 , 'In Stock', 1);
 
 */

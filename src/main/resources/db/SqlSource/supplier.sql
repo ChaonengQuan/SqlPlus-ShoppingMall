@@ -10,22 +10,23 @@ Name		VARCHAR2(50)	NOT NULL,
 RestockDate	DATE,
 SupplyPrice	INTEGER,
 Amount		INTEGER,
+ProductID   INTEGER,
 PRIMARY KEY(id)
 );
 
--- Create sequence
-CREATE SEQUENCE supplier_id_sequence;
-
--- Create trigger
-CREATE OR REPLACE TRIGGER supplier_on_insert
-  BEFORE INSERT ON chaonengquan.Supplier
-  FOR EACH ROW
-BEGIN
-  SELECT supplier_id_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-/
+-- -- Create sequence
+-- CREATE SEQUENCE supplier_id_sequence;
+--
+-- -- Create trigger
+-- CREATE OR REPLACE TRIGGER supplier_on_insert
+--   BEFORE INSERT ON chaonengquan.Supplier
+--   FOR EACH ROW
+-- BEGIN
+--   SELECT supplier_id_sequence.nextval
+--   INTO :new.id
+--   FROM dual;
+-- END;
+-- /
 
 --example code to insert dummy data
 /*
