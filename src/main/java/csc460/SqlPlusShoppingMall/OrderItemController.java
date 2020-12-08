@@ -1,6 +1,5 @@
 package csc460.SqlPlusShoppingMall;
 
-import com.sun.tools.corba.se.idl.constExpr.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
-import javax.jws.WebParam;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,7 +50,7 @@ public class OrderItemController {
     @GetMapping("/update")
     public String updateOrderItemForm(@ModelAttribute OrderItem toUpdate, Model model) {
         model.addAttribute("toUpdate", toUpdate);
-        return "updateEmployee";
+        return "updateOrderItem";
     }
 
     @PostMapping("/update")
