@@ -30,7 +30,7 @@ public class SalesRecordController {
         String sql = "DELETE FROM chaonengquan.SalesRecord WHERE id = ?";
         jdbcTemplate.update(sql, salesRecord.getId());
 
-        return "allSalesRecordResult";
+        return "redirect:all";
     }
 
 
