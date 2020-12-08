@@ -76,6 +76,7 @@ public class EmployeeController {
                 new RowMapper<Employee>() {
                     public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Employee employee = new Employee();
+                        employee.setId(rs.getLong("Id"));
                         employee.setFirstName(rs.getString("FirstName"));
                         employee.setLastName(rs.getString("LastName"));
                         employee.setGender(rs.getString("Gender"));

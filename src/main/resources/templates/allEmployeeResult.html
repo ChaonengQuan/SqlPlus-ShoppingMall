@@ -12,6 +12,7 @@
     <h3> Current employee in the table Employee</h3>
     <table>
         <tr>
+            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Gender</th>
@@ -22,6 +23,7 @@
             <th>Operation</th>
         </tr>
         <tr th:each="employee : ${employeeList}">
+            <td th:text="${employee.id}"></td>
             <td th:text="${employee.firstName}"></td>
             <td th:text="${employee.lastName}"></td>
             <td th:text="${employee.gender}"></td>
@@ -44,6 +46,8 @@
     </table>
 
     <br>
+    <hr>
+    <br>
 
     <form th:action="@{/employee/add}" th:object="${toAdd}" method="post">
 
@@ -59,7 +63,9 @@
         <p class="input_error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</p>
         <p class="input_error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</p>
         <p class="input_error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</p>
-
+        
+        <br>
+        <br>
         <button type="submit">Insert</button>
     </form>
 
