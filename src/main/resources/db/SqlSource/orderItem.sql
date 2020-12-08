@@ -8,7 +8,7 @@ CREATE TABLE chaonengquan.OrderItem(
 SalesRecordId		INTEGER		NOT NULL,
 ProductId		INTEGER		NOT NULL,
 PaidPrice		FLOAT,
-Quntity			FLOAT
+Quantity			INTEGER
 );
 
 
@@ -18,7 +18,7 @@ Quntity			FLOAT
 /*
 
 INSERT INTO chaonengquan.OrderItem
-(SalesRecordID, ProductID, PaidPrice, Quntity)
+(SalesRecordID, ProductID, PaidPrice, Quantity)
 VALUES
 (1, 1, 500, 1);
 */
