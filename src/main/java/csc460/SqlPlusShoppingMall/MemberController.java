@@ -25,83 +25,59 @@ public class MemberController {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @GetMapping("/add")
-    public String memberFormGet(Model model) {
-        model.addAttribute("member", new Member());
-        return "addMember";
-    }
-
     /*--Add--*/
     @PostMapping("/add")
-    public String memberFormSubmit(@ModelAttribute @Valid Member member, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {    //if inputs are not valid
-            return "addMember";
-        } else {
-            String sql = "INSERT INTO chaonengquan.Member (FirstName, LastName, DateOfBirth, Address, Phone, RewardPoint, MembershipPaid) VALUES (?, ?, ? ,? ,? ,?, ?)";
-            jdbcTemplate.update(sql, member.getFirstName(), member.getLastName(), member.getDateOfBirth(), member.getAddress(), member.getPhone(), member.getRewardPoint(), member.getMembershipPaid());
-            return "addMemberResult";
+    public String memberFormSubmit(@ModelAttribute @Valid Member toAdd, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            String sql = "INSERT INTO chaonengquan.Member (id, FirstName, LastName, DateOfBirth, Address, Phone, RewardPoint, MembershipPaid) VALUES (?, ?, ?, ? ,? ,? ,?, ?)";
+            jdbcTemplate.update(sql, toAdd.getId(), toAdd.getFirstName(), toAdd.getLastName(), toAdd.getDateOfBirth(), toAdd.getAddress(), toAdd.getPhone(), toAdd.getRewardPoint(), toAdd.getMembershipPaid());
         }
+        //if inputs are not valid
+        return "redirect:all";
     }
 
     /*--Delete--*/
-    @GetMapping("/delete")
-    public String memberFormDelete(Model model) {
-        model.addAttribute("member", new Member());
-        return "deleteMember";
-    }
-
     @PostMapping("/delete")
-    public String memberDelete(@ModelAttribute @Valid Member member, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {    //if inputs are not valid
-            return "deleteMember";
-        } else {
-            String sql = "DELETE FROM chaonengquan.Member WHERE FirstName = ? AND LastName = ? AND Phone = ?";
-            jdbcTemplate.update(sql, member.getFirstName(), member.getLastName(), member.getPhone());
-            return "deleteMemberResult";
-        }
+    public String memberDelete(@ModelAttribute Member member) {
+        String sql = "DELETE FROM chaonengquan.Member WHERE id = ?";
+        jdbcTemplate.update(sql, member.getId());
+        return "redirect:all";
     }
 
     /*--Update--*/
     @GetMapping("/update")
-    public String memberFormUpdate(Model model){
-        model.addAttribute("member", new Member());
+    public String memberFormUpdate(@ModelAttribute Member toUpdate, Model model) {
+        model.addAttribute("member", toUpdate);
         return "updateMember";
     }
 
     @PostMapping("/update")
-    public String memberUpdate(@ModelAttribute @Valid Member member, BindingResult bindingResult){
+    public String memberUpdate(@ModelAttribute @Valid Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {    //if inputs are not valid
-            // System.out.println("!!!!!!!!!!!!!update has error!!!!");
-            // System.out.println(bindingResult.getAllErrors());
             return "updateMember";
         } else {
-            String sql = "UPDATE chaonengquan.Member SET DateOfBirth = ?, Address = ?, RewardPoint = ?, MembershipPaid = ? WHERE FirstName = ? AND LastName = ? AND Phone = ?";
-            jdbcTemplate.update(sql, member.getDateOfBirth(), member.getAddress(), member.getRewardPoint(), member.getMembershipPaid(), member.getFirstName(), member.getLastName(), member.getPhone());
-            return "updateMemberResult";
+            String sql = "UPDATE chaonengquan.Member SET FirstName = ?, LastName = ?, Phone = ?, DateOfBirth = ?, Address = ?, RewardPoint = ?, MembershipPaid = ? WHERE id = ?";
+            jdbcTemplate.update(sql, member.getFirstName(), member.getLastName(), member.getPhone(), member.getDateOfBirth(), member.getAddress(), member.getRewardPoint(), member.getMembershipPaid(), member.getId());
+            return "redirect:all";
         }
     }
 
     /*--Query--*/
     @GetMapping("/all")
     public String getAllMember(Model model) {
+        model.addAttribute("toAdd", new Member());  //for the later insert
         List<Member> allMember = this.jdbcTemplate.query(
                 "select * from chaonengquan.Member",
                 (rs, rowNum) -> {
                     Member member = new Member();
-                    String firstName = rs.getString("FirstName");
-                    String lastName = rs.getString("LastName");
-                    Date dateOfBirth = rs.getDate("DateOfBirth");
-                    String address = rs.getString("Address");
-                    long phone = rs.getLong("Phone");   //long corresponds to integer in oracle
-                    long rewardPoint = rs.getLong("RewardPoint");
-                    String membershipPaid = rs.getString("MembershipPaid");
-                    member.setFirstName(firstName);
-                    member.setLastName(lastName);
-                    member.setDateOfBirth(dateOfBirth);
-                    member.setAddress(address);
-                    member.setPhone(phone);
-                    member.setRewardPoint(rewardPoint);
-                    member.setMembershipPaid(membershipPaid);
+                    member.setId(rs.getLong("id"));
+                    member.setFirstName(rs.getString("FirstName"));
+                    member.setLastName(rs.getString("LastName"));
+                    member.setDateOfBirth(rs.getDate("DateOfBirth"));
+                    member.setAddress(rs.getString("Address"));
+                    member.setPhone(rs.getLong("Phone"));
+                    member.setRewardPoint(rs.getLong("RewardPoint"));
+                    member.setMembershipPaid(rs.getString("MembershipPaid"));
                     return member;
                 });
         model.addAttribute("allMember", allMember);

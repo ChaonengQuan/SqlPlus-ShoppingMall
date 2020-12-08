@@ -5,19 +5,18 @@ import java.sql.Date;
 
 public class Member {
 
+    @NotNull
     private long id;
     @NotBlank(message = "First Name cannot be blank!")
-    @Size(max=50)
     private String firstName;
     @NotBlank(message = "Last Name cannot be blank!")
-    @Size(max=50)
     private String lastName;
+    @PastOrPresent
     private Date DateOfBirth;
     private String Address;
     @NotNull
     private long phone;
     private long rewardPoint;
-    @Size(max=10)
     private String membershipPaid;
 
     public long getId() {
