@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>All SalesRecord</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<center>
+    <h3> Current sales record in the table SalesRecord</h3>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Order Date</th>
+            <th>Payment Method</th>
+            <th>Total Amount</th>
+            <th>Member ID</th>
+            <th>Operation</th>
+        </tr>
+        <tr th:each="salesRecord : ${salesRecordList}">
+            <td th:text="${salesRecord.id}"></td>
+            <td th:text="${salesRecord.orderDate}"></td>
+            <td th:text="${salesRecord.paymentMethod}"></td>
+            <td th:text="${salesRecord.totalAmount}"></td>
+            <td th:text="${salesRecord.memberID}"></td>
+            <td>
+                <form th:action="@{/salesRecord/delete}" th:object="${salesRecord}" method="post">
+                    <input type="hidden" name="id" th:value="${salesRecord.id}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</center>
+</body>
+
+</html>
