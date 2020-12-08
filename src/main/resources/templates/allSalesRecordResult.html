@@ -30,6 +30,12 @@
                     <input type="hidden" name="id" th:value="${salesRecord.id}">
                     <button type="submit">Delete</button>
                 </form>
+
+                <form th:action="@{/salesRecord/update}" th:object="${salesRecord}" method="get">
+                    <input type="hidden" name="id" th:value="${salesRecord.id}">
+                    <button type="submit">Update</button>
+                </form>
+
             </td>
         </tr>
     </table>

@@ -22,9 +22,22 @@ public class SalesRecordController {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    @GetMapping("/update")
+    public String updateSalesRecord(@ModelAttribute SalesRecord toUpdate, Model model){
+        model.addAttribute("toUpdate", toUpdate);
+        return "updateSalesRecord";
+    }
+
+    @PostMapping("/update")
+    public String updateSalesRecord(@ModelAttribute SalesRecord salesRecord){
+        String sql = "UPDATE chaonengquan.SalesRecord SET OrderDate = ? , PaymentMethod = ?, TotalAmount = ?, MemberID = ? WHERE id = ?";
+        jdbcTemplate.update(sql, salesRecord.getOrderDate(), salesRecord.getPaymentMethod(), salesRecord.getTotalAmount(), salesRecord.getMemberID(), salesRecord.getId());
+        return  "redirect:all";
+    }
+
 
     @PostMapping("/delete")
-    public String deleteSalesRecord(@ModelAttribute SalesRecord salesRecord, Model model) {
+    public String deleteSalesRecord(@ModelAttribute SalesRecord salesRecord) {
 
         //Step1: delete the target
         String sql = "DELETE FROM chaonengquan.SalesRecord WHERE id = ?";

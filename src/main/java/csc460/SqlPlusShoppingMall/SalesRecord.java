@@ -7,7 +7,6 @@ import java.sql.Date;
 public class SalesRecord {
     @NotNull
     private long id;
-    @NotNull
     private Date orderDate;
     private String paymentMethod;
     private float totalAmount;
