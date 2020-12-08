@@ -40,16 +40,20 @@
     </table>
 
     <br>
+    <hr>
+    <br>
 
     <form th:action="@{/salesRecord/add}" th:object="${toAdd}" method="post">
 
         ID: <input type="number" th:field="*{id}"/>
         Order Date: <input type="date" th:field="*{orderDate}"/>
         Payment Method: <input type="text" th:field="*{paymentMethod}"/>
-        Total Amount: <input type="number" th:field="*{totalAmount}"/>
+        Total Amount: <input type="number" step="0.01" th:field="*{totalAmount}"/>
         Member ID: <input type="number" th:field="*{memberID}"/>
         <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Sales Record ID Error</p>
 
+        <br>
+        <br>
         <button type="submit">Insert</button>
     </form>
 

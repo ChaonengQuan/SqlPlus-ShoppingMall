@@ -52,7 +52,7 @@
     <form th:action="@{/member/add}" th:object="${toAdd}" method="post">
         ID: <input type="number" th:field="*{id}" required/>
         First Name: <input type="text" th:field="*{firstName}" required/>
-        Last Name: <input type="text" th:field="*{lastName}" required/>
+        Last Name: <input type="text" th:field="*{lastName}" required/><br><br>
         Date of Birth: <input type="date" th:field="*{dateOfBirth}"/>
         Address: <input type="text" th:field="*{address}"/>
         Phone: <input type="number" th:field="*{phone}" required/>
