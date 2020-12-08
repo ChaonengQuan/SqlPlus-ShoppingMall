@@ -11,7 +11,6 @@ public class Member {
     private String firstName;
     @NotBlank(message = "Last Name cannot be blank!")
     private String lastName;
-    @PastOrPresent
     private Date DateOfBirth;
     private String Address;
     @NotNull

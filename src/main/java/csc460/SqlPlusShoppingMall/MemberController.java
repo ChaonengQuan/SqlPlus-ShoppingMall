@@ -27,7 +27,7 @@ public class MemberController {
 
     /*--Add--*/
     @PostMapping("/add")
-    public String memberFormSubmit(@ModelAttribute Member toAdd, BindingResult bindingResult) {
+    public String memberFormSubmit(@ModelAttribute @Valid Member toAdd, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             //bindingResult.getAllErrors().forEach(System.out::println);
             return "redirect:all";
