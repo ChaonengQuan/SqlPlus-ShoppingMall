@@ -22,6 +22,13 @@ public class SalesRecordController {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    @PostMapping("/add")
+    public String addSalesRecord(@ModelAttribute SalesRecord toAdd){
+        String sql = "INSERT INTO chaonengquan.SalesRecord (id, OrderDate, PaymentMethod, TotalAmount, MemberId) VALUES(?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, toAdd.getId(), toAdd.getOrderDate(), toAdd.getPaymentMethod(), toAdd.getTotalAmount(), toAdd.getMemberID());
+        return "redirect:all";
+    }
+
     @GetMapping("/update")
     public String updateSalesRecord(@ModelAttribute SalesRecord toUpdate, Model model){
         model.addAttribute("toUpdate", toUpdate);
@@ -50,6 +57,8 @@ public class SalesRecordController {
 
     @GetMapping("/all")
     public String getAllSalesRecord(Model model) {
+        model.addAttribute("toAdd", new SalesRecord());
+
         List<SalesRecord> salesRecordList = this.jdbcTemplate.query(
                 "SELECT * FROM chaonengquan.SalesRecord",
                 (rs, rowNum) -> {
