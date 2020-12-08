@@ -44,6 +44,8 @@
     </table>
 
     <br>
+    <hr>
+    <br>
 
     <form th:action="@{/product/add}" th:object="${toAdd}" method="post">
 
@@ -57,7 +59,10 @@
 
         <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Product ID Error</p>
         <p class="input_error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Product Name Error</p>
+        
 
+        <br>
+        <br>
         <button type="submit">Insert</button>
     </form>
 
