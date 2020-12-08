@@ -30,7 +30,8 @@ public class SalesRecordController {
 
     @PostMapping("/update")
     public String updateSalesRecord(@ModelAttribute SalesRecord salesRecord){
-        String sql = "UPDATE chaonengquan.SalesRecord SET OrderDate = ? , PaymentMethod = ?, TotalAmount = ?, MemberID = ? WHERE id = ?";
+        String sql = "UPDATE chaonengquan.SalesRecord SET OrderDate = ?, PaymentMethod = ?, TotalAmount = ?, MemberID = ? WHERE id = ?";
+        //debug output
         jdbcTemplate.update(sql, salesRecord.getOrderDate(), salesRecord.getPaymentMethod(), salesRecord.getTotalAmount(), salesRecord.getMemberID(), salesRecord.getId());
         return  "redirect:all";
     }

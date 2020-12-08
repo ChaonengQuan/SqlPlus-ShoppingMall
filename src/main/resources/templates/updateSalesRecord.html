@@ -11,10 +11,10 @@
 <center>
     <h1>Update a sales record in the table</h1>
     <form action="#" th:action="@{/salesRecord/update}" th:object="${toUpdate}" method="post">
-
+        <input type="hidden" name="id" th:value="${toUpdate.id}">
         <p>Order Date: <input type="date" th:field="*{orderDate}"/></p>
         <p>Payment Method: <input type="text" th:field="*{paymentMethod}"/></p>
-        <p>Total Amount: <input type="float" th:field="*{totalAmount}"/></p>
+        <p>Total Amount: <input type="number" th:field="*{totalAmount}"/></p>
         <p>Member ID: <input type="number" th:field="*{memberID}"/></p>
 
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
