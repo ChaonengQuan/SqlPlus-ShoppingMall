@@ -2,15 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Update Employee</title>
+    <title>Update Member</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
 <center>
-    <h1>Update an employee in the table</h1>
-    <form action="#" th:action="@{/employee/update}" th:object="${toUpdate}" method="post">
+    <h1>Update a member in the table</h1>
+    <form action="#" th:action="@{/member/update}" th:object="${toUpdate}" method="post">
+
         <input type="hidden" name="id" th:value="${toUpdate.id}">
 
         <p>First Name: <input type="text" th:field="*{firstName}" required/></p>
@@ -19,13 +20,13 @@
         <p>Last Name: <input type="text" th:field="*{lastName}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</p>
 
-        <p>Gender: <input type="text" th:field="*{gender}"/></p>
+        <p>Date of Birth: <input type="date" th:field="*{dateOfBirth}"/></p>
         <p>Address: <input type="text" th:field="*{address}"/></p>
         <p>Phone: <input type="number" th:field="*{phone}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</p>
 
-        <p>Employee Group: <input type="text" th:field="*{employeeGroup}"/></p>
-        <p>Salary: <input type="number" th:field="*{salary}"/></p>
+        <p>Reward Point: <input type="number" th:field="*{rewardPoint}"/></p>
+        <p>Membership Paid: <input type="text" th:field="*{membershipPaid}"/></p>
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
     </form>
 </center>

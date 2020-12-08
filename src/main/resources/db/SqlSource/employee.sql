@@ -17,19 +17,18 @@ Salary		INTEGER,
 PRIMARY KEY(id)
 );
 
---Auto-Increment = sequence + trigger
-CREATE SEQUENCE employee_id_sequence; 
-
-CREATE OR REPLACE TRIGGER employee_on_insert
-  BEFORE INSERT ON chaonengquan.Employee
-  FOR EACH ROW
-BEGIN
-  SELECT employee_id_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-/
-
+-- --Auto-Increment = sequence + trigger
+-- CREATE SEQUENCE employee_id_sequence;
+--
+-- CREATE OR REPLACE TRIGGER employee_on_insert
+--   BEFORE INSERT ON chaonengquan.Employee
+--   FOR EACH ROW
+-- BEGIN
+--   SELECT employee_id_sequence.nextval
+--   INTO :new.id
+--   FROM dual;
+-- END;
+-- /
 
 --Grant permission for teammates
 GRANT SELECT ON chaonengquan.Employee TO PUBLIC;

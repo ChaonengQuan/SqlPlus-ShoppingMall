@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>All Employee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<center>
+    <h3> Current employee in the table Employee</h3>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>EmployeeGroup</th>
+            <th>Salary</th>
+            <th>Operation</th>
+        </tr>
+        <tr th:each="employee : ${employeeList}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.gender}"></td>
+            <td th:text="${employee.address}"></td>
+            <td th:text="${employee.phone}"></td>
+            <td th:text="${employee.employeeGroup}"></td>
+            <td th:text="${employee.salary}"></td>
+            <td>
+                <form th:action="@{/employee/delete}" th:object="${employee}" method="post">
+                    <input type="hidden" name="id" th:value="${employee.id}">
+                    <button type="submit">Delete</button>
+                </form>
+
+                <form th:action="@{/employee/update}" th:object="${employee}" method="get">
+                    <input type="hidden" name="id" th:value="${employee.id}">
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <form th:action="@{/employee/add}" th:object="${toAdd}" method="post">
+
+        ID: <input type="number" th:field="*{id}" required/>
+        First Name: <input type="text" th:field="*{firstName}" required/>
+        Last Name: <input type="text" th:field="*{lastName}" required/>
+        Gender: <input type="text" th:field="*{gender}"/>
+        Address: <input type="text" th:field="*{address}"/>
+        Phone: <input type="number" th:field="*{phone}" required/>
+        Employee Group: <input type="text" th:field="*{employeeGroup}"/>
+        Salary: <input type="number" th:field="*{salary}"/>
+
+        <p class="input_error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</p>
+        <p class="input_error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</p>
+        <p class="input_error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</p>
+        
+        <br>
+        <br>
+        <button type="submit">Insert</button>
+    </form>
+
+</center>
+</body>
+
+</html>

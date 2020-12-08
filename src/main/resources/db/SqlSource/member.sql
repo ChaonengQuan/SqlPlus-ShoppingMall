@@ -12,23 +12,24 @@ DateOfBirth	DATE,
 Address		VARCHAR2(100),
 Phone		INTEGER		NOT NULL,
 RewardPoint	INTEGER,
+MembershipPaid  VARCHAR2(10),
 PRIMARY KEY(id)
 );
 
---Create sequence
-CREATE SEQUENCE member_id_sequence;
-
-
---Create Trigger
-CREATE OR REPLACE TRIGGER member_on_insert
-  BEFORE INSERT ON chaonengquan.Member
-  FOR EACH ROW
-BEGIN
-  SELECT member_id_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-/
+-- --Create sequence
+-- CREATE SEQUENCE member_id_sequence;
+--
+--
+-- --Create Trigger
+-- CREATE OR REPLACE TRIGGER member_on_insert
+--   BEFORE INSERT ON chaonengquan.Member
+--   FOR EACH ROW
+-- BEGIN
+--   SELECT member_id_sequence.nextval
+--   INTO :new.id
+--   FROM dual;
+-- END;
+-- /
 
 
 --Grant permission for teammates
@@ -39,8 +40,8 @@ END;
 /*
 
 INSERT INTO chaonengquan.Member
-(FirstName, LastName, DateOfBirth, Address, Phone, RewardPoint)
+(FirstName, LastName, DateOfBirth, Address, Phone, RewardPoint, MembershipPaid)
 VALUES
-('Ice', 'Cube', TO_DATE('12/01/1996', 'MM/DD/YYYY'), 'Compton, California', 2132132133, 100);
+('Ice', 'Cube', TO_DATE('12/01/1996', 'MM/DD/YYYY'), 'Compton, California', 2132132133, 100, 'Yes');
 
 */

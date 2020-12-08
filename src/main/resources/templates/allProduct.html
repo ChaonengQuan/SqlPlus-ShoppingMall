@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>All Product</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<center>
+    <h3> Current product in the table Product</h3>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Retail Price</th>
+            <th>Category</th>
+            <th>Member Discount</th>
+            <th>StockInfo</th>
+            <th>SupplierId</th>
+            <th>Operation</th>
+        </tr>
+        <tr th:each="product : ${allProduct}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.retailPrice}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.memberDiscount}"></td>
+            <td th:text="${product.stockInfo}"></td>
+            <td th:text="${product.supplierID}"></td>
+            <td>
+                <form th:action="@{/product/delete}" th:object="${product}" method="post">
+                    <input type="hidden" name="id" th:value="${product.id}">
+                    <button type="submit">Delete</button>
+                </form>
+
+                <form th:action="@{/product/update}" th:object="${product}" method="get">
+                    <input type="hidden" name="id" th:value="${product.id}">
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <form th:action="@{/product/add}" th:object="${toAdd}" method="post">
+
+        ID: <input type="number" th:field="*{id}"/>
+        Name: <input type="text" th:field="*{name}"/>
+        Retail Price: <input type="number" th:field="*{retailPrice}"/>
+        Category: <input type="text" th:field="*{category}"/>
+        Member Discount: <input type="number" th:field="*{memberDiscount}"/>
+        Stock Info: <input type="text" th:field="*{stockInfo}"/>
+        Supplier ID: <input type="number" th:field="*{supplierID}"/>
+
+        <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Product ID Error</p>
+        <p class="input_error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Product Name Error</p>
+        
+
+        <br>
+        <br>
+        <button type="submit">Insert</button>
+    </form>
+
+</center>
+</body>
+
+</html>

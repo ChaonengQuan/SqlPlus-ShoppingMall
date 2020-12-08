@@ -1,8 +1,9 @@
 package csc460.SqlPlusShoppingMall;
 
 import javax.validation.constraints.*;
+import java.sql.Date;
 
-public class Employee {
+public class Member {
 
     @NotNull
     private long id;
@@ -10,13 +11,12 @@ public class Employee {
     private String firstName;
     @NotBlank(message = "Last Name cannot be blank!")
     private String lastName;
-    private String gender;
-    private String address;
+    private Date DateOfBirth;
+    private String Address;
     @NotNull
     private long phone;
-    private String employeeGroup;
-    @PositiveOrZero
-    private long salary;
+    private long rewardPoint;
+    private String membershipPaid;
 
     public long getId() {
         return id;
@@ -42,20 +42,20 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getGender() {
-        return gender;
+    public Date getDateOfBirth() {
+        return DateOfBirth;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setDateOfBirth(Date dateOfBirth) {
+        DateOfBirth = dateOfBirth;
     }
 
     public String getAddress() {
-        return address;
+        return Address;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        Address = address;
     }
 
     public long getPhone() {
@@ -66,33 +66,33 @@ public class Employee {
         this.phone = phone;
     }
 
-    public String getEmployeeGroup() {
-        return employeeGroup;
+    public long getRewardPoint() {
+        return rewardPoint;
     }
 
-    public void setEmployeeGroup(String employeeGroup) {
-        this.employeeGroup = employeeGroup;
+    public void setRewardPoint(long rewardPoint) {
+        this.rewardPoint = rewardPoint;
     }
 
-    public long getSalary() {
-        return salary;
+    public String getMembershipPaid() {
+        return membershipPaid;
     }
 
-    public void setSalary(long salary) {
-        this.salary = salary;
+    public void setMembershipPaid(String membershipPaid) {
+        this.membershipPaid = membershipPaid;
     }
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Member{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", address='" + address + '\'' +
+                ", DateOfBirth=" + DateOfBirth +
+                ", Address='" + Address + '\'' +
                 ", phone=" + phone +
-                ", employeeGroup='" + employeeGroup + '\'' +
-                ", salary=" + salary +
+                ", rewardPoint=" + rewardPoint +
+                ", membershipPaid='" + membershipPaid + '\'' +
                 '}';
     }
 }
