@@ -49,7 +49,7 @@
     <hr>
     <br>
 
-    <form th:action="@{/employee/add}" th:object="${toAdd}" method="post">
+    <form th:action="@{/member/add}" th:object="${toAdd}" method="post">
         ID: <input type="number" th:field="*{id}" required/>
         First Name: <input type="text" th:field="*{firstName}" required/>
         Last Name: <input type="text" th:field="*{lastName}" required/>

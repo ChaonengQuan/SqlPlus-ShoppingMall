@@ -12,7 +12,7 @@
     <h1>Update a member in the table</h1>
     <form action="#" th:action="@{/member/update}" th:object="${toUpdate}" method="post">
 
-        <input type="hidden" name="id" th:value="${id}">
+        <input type="hidden" name="id" th:value="${toUpdate.id}">
 
         <p>First Name: <input type="text" th:field="*{firstName}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</p>

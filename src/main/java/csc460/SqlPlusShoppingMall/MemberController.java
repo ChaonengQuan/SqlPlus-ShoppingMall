@@ -27,8 +27,11 @@ public class MemberController {
 
     /*--Add--*/
     @PostMapping("/add")
-    public String memberFormSubmit(@ModelAttribute @Valid Member toAdd, BindingResult bindingResult) {
-        if (!bindingResult.hasErrors()) {
+    public String memberFormSubmit(@ModelAttribute Member toAdd, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            //bindingResult.getAllErrors().forEach(System.out::println);
+            return "redirect:all";
+        }else{
             String sql = "INSERT INTO chaonengquan.Member (id, FirstName, LastName, DateOfBirth, Address, Phone, RewardPoint, MembershipPaid) VALUES (?, ?, ?, ? ,? ,? ,?, ?)";
             jdbcTemplate.update(sql, toAdd.getId(), toAdd.getFirstName(), toAdd.getLastName(), toAdd.getDateOfBirth(), toAdd.getAddress(), toAdd.getPhone(), toAdd.getRewardPoint(), toAdd.getMembershipPaid());
         }
@@ -47,17 +50,18 @@ public class MemberController {
     /*--Update--*/
     @GetMapping("/update")
     public String memberFormUpdate(@ModelAttribute Member toUpdate, Model model) {
-        model.addAttribute("member", toUpdate);
+        model.addAttribute("toUpdate", toUpdate);   //key value pair
         return "updateMember";
     }
 
     @PostMapping("/update")
-    public String memberUpdate(@ModelAttribute @Valid Member member, BindingResult bindingResult) {
+    public String memberUpdate(@ModelAttribute Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {    //if inputs are not valid
-            return "updateMember";
+            //bindingResult.getAllErrors().forEach(System.out::println);
+            return "redirect:all";
         } else {
-            String sql = "UPDATE chaonengquan.Member SET FirstName = ?, LastName = ?, Phone = ?, DateOfBirth = ?, Address = ?, RewardPoint = ?, MembershipPaid = ? WHERE id = ?";
-            jdbcTemplate.update(sql, member.getFirstName(), member.getLastName(), member.getPhone(), member.getDateOfBirth(), member.getAddress(), member.getRewardPoint(), member.getMembershipPaid(), member.getId());
+            String sql = "UPDATE chaonengquan.Member SET FirstName = ?, LastName = ?, DateOfBirth = ?, Address = ?, Phone = ?, RewardPoint = ?, MembershipPaid = ? WHERE id = ?";
+            jdbcTemplate.update(sql, member.getFirstName(), member.getLastName(), member.getDateOfBirth(), member.getAddress(), member.getPhone(), member.getRewardPoint(), member.getMembershipPaid(), member.getId());
             return "redirect:all";
         }
     }
