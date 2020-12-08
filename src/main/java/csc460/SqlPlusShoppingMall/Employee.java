@@ -4,20 +4,16 @@ import javax.validation.constraints.*;
 
 public class Employee {
 
+    @NotNull
     private long id;
     @NotBlank(message = "First Name cannot be blank!")
-    @Size(max=50)
     private String firstName;
     @NotBlank(message = "Last Name cannot be blank!")
-    @Size(max=50)
     private String lastName;
-    @Size(max=10)
     private String gender;
-    @Size(max=100)
     private String address;
     @NotNull
     private long phone;
-    @Size(max=50)
     private String employeeGroup;
     @PositiveOrZero
     private long salary;

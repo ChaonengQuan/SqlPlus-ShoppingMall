@@ -10,16 +10,18 @@
 <body>
 <center>
     <h1>Update an employee in the table</h1>
-    <form action="#" th:action="@{/updateEmployee}" th:object="${employee}" method="post">
-        <p>First Name: <input type="text" th:field="*{firstName}"/></p>
+    <form action="#" th:action="@{/employee/update}" th:object="${toUpdate}" method="post">
+        <input type="hidden" name="id" th:value="${toUpdate.id}">
+
+        <p>First Name: <input type="text" th:field="*{firstName}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</p>
 
-        <p>Last Name: <input type="text" th:field="*{lastName}"/></p>
+        <p>Last Name: <input type="text" th:field="*{lastName}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</p>
 
         <p>Gender: <input type="text" th:field="*{gender}"/></p>
         <p>Address: <input type="text" th:field="*{address}"/></p>
-        <p>Phone: <input type="number" th:field="*{phone}"/></p>
+        <p>Phone: <input type="number" th:field="*{phone}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</p>
 
         <p>Employee Group: <input type="text" th:field="*{employeeGroup}"/></p>

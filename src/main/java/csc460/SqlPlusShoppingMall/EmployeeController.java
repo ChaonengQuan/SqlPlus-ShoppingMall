@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Controller
+@RequestMapping("/employee")
 public class EmployeeController {
 
     @Autowired
@@ -29,85 +30,59 @@ public class EmployeeController {
     }
 
     /*--Add--*/
-    @GetMapping("/addEmployee")
-    public String addEmployeeFormGet(Model model) {
-        model.addAttribute("employee", new Employee());
-        return "addEmployee";
-    }
-
-    @PostMapping("/addEmployee")
-    public String addEmployeeFormPost(@ModelAttribute @Valid Employee employee, BindingResult bindingResult) {
+    @PostMapping("/add")
+    public String addEmployeeFormPost(@ModelAttribute @Valid Employee toAdd, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {    //if inputs are not valid
             return "addEmployee";
         } else {
-            String sql = "INSERT INTO chaonengquan.Employee (FirstName, LastName, Gender, Address, Phone, EmployeeGroup, Salary) VALUES (?, ?, ? ,? ,? ,? ,?)";
-            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(), employee.getGender(), employee.getAddress(), employee.getPhone(), employee.getEmployeeGroup(), employee.getSalary());
-            return "addEmployeeResult";
+            String sql = "INSERT INTO chaonengquan.Employee (id, FirstName, LastName, Gender, Address, Phone, EmployeeGroup, Salary) VALUES (?, ?, ?, ? ,? ,? ,? ,?)";
+            jdbcTemplate.update(sql, toAdd.getId(), toAdd.getFirstName(), toAdd.getLastName(), toAdd.getGender(), toAdd.getAddress(), toAdd.getPhone(), toAdd.getEmployeeGroup(), toAdd.getSalary());
+            return "redirect:all";
         }
     }
 
     /*--Delete--*/
-    @GetMapping("/deleteEmployee")
-    public String deleteEmployeeFormGet(Model model) {
-        model.addAttribute("employee", new Employee());
-        return "deleteEmployee";
-    }
-
-    @PostMapping("/deleteEmployee")
-    public String deleteEmployeeFormPost(@ModelAttribute @Valid Employee employee, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {    //if inputs are not valid
-            return "deleteEmployee";
-        } else {
-            String sql = "DELETE FROM chaonengquan.Employee WHERE FirstName = ? AND LastName = ? AND Phone = ?";
-            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(), employee.getPhone());
-            return "deleteEmployeeResult";
-        }
+    @PostMapping("/delete")
+    public String deleteEmployeeFormPost(@ModelAttribute Employee employee) {
+        String sql = "DELETE FROM chaonengquan.Employee WHERE id = ?";
+        jdbcTemplate.update(sql, employee.getId());
+        return "redirect:all";
     }
 
     /*--Update--*/
-    @GetMapping("/updateEmployee")
-    public String updateEmployeeFormGet(Model model) {
-        model.addAttribute("employee", new Employee());
+    @GetMapping("/update")
+    public String updateEmployeeFormGet(@ModelAttribute Employee toUpdate, Model model) {
+        model.addAttribute("toUpdate", toUpdate);
         return "updateEmployee";
     }
 
-    @PostMapping("/updateEmployee")
+    @PostMapping("/update")
     public String updateEmployeeFormPost(@ModelAttribute @Valid Employee employee, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {    //if inputs are not valid
             return "updateEmployee";
         } else {
-            String sql = "UPDATE chaonengquan.Employee SET Gender = ?, Address = ?, EmployeeGroup = ?, Salary = ? WHERE FirstName = ? AND LastName = ? AND Phone = ?";
-            jdbcTemplate.update(sql, employee.getGender(), employee.getAddress(), employee.getEmployeeGroup(), employee.getSalary(), employee.getFirstName(), employee.getLastName(), employee.getPhone());
-            return "updateEmployeeResult";
+            String sql = "UPDATE chaonengquan.Employee SET FirstName = ?, LastName = ?, Phone = ?,  Gender = ?, Address = ?, EmployeeGroup = ?, Salary = ? WHERE id = ?";
+            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(), employee.getPhone(), employee.getGender(), employee.getAddress(), employee.getEmployeeGroup(), employee.getSalary(), employee.getId());
+            return "redirect:all";
         }
     }
 
     /*--Query--*/
-    @GetMapping("/allEmployee")
+    @GetMapping("/all")
     public String queryResults(Model model) {
+        model.addAttribute("toAdd", new Employee());
         List<Employee> allEmployee = this.jdbcTemplate.query(
                 "select * from chaonengquan.Employee",
                 new RowMapper<Employee>() {
                     public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Employee employee = new Employee();
-                        
-                        String firstName = rs.getString("FirstName");
-                        String lastName = rs.getString("LastName");
-                        String gender = rs.getString("Gender");
-                        String address = rs.getString("Address");
-                        long phone = rs.getLong("Phone");   //long corresponds to integer in oracle
-                        String employeeGroup = rs.getString("EmployeeGroup");
-                        long salary = rs.getLong("Salary");
-                        
-                        employee.setFirstName(firstName);
-                        employee.setLastName(lastName);
-                        employee.setGender(gender);
-                        employee.setAddress(address);
-                        employee.setPhone(phone);
-                        employee.setEmployeeGroup(employeeGroup);
-                        employee.setSalary(salary);
-
-
+                        employee.setFirstName(rs.getString("FirstName"));
+                        employee.setLastName(rs.getString("LastName"));
+                        employee.setGender(rs.getString("Gender"));
+                        employee.setAddress(rs.getString("Address"));
+                        employee.setPhone(rs.getLong("Phone")); //long corresponds to integer in oracle
+                        employee.setEmployeeGroup(rs.getString("EmployeeGroup"));
+                        employee.setSalary(rs.getLong("Salary"));
                         return employee;
                     }
                 });
