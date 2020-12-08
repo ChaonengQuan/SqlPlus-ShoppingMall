@@ -10,9 +10,9 @@
 <body>
 <center>
     <h1>Update a product in the table</h1>
-    <form action="#" th:action="@{/product/update}" th:object="${product}" method="post">
-        <p>Product ID: <input type="number" th:field="*{id}"/></p>
-        <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Product ID Error</p>
+    <form action="#" th:action="@{/product/update}" th:object="${toUpdate}" method="post">
+
+        <input type="hidden" name="id" th:value="${toUpdate.id}">
 
         <p>Product Name: <input type="text" th:field="*{name}"/></p>
         <p class="input_error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Product Name Error</p>

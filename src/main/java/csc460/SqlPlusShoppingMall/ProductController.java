@@ -28,61 +28,48 @@ public class ProductController {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @GetMapping("/add")
-    public String addProductFormGet(Model model) {
-        model.addAttribute("product", new Product());
-        return "addProduct";
-    }
 
     @PostMapping("/add")
     public String addProductFormPost(@ModelAttribute @Valid Product product, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {    //if inputs are not valid
-            return "addProduct";
+            return "redirect:all";
         } else {
             String sql = "INSERT INTO chaonengquan.Product (id, Name, RetailPrice, Category, MemberDiscount, StockInfo, SupplierID) VALUES (?, ?, ? ,? ,? ,? ,?)";
             jdbcTemplate.update(sql, product.getId(), product.getName(), product.getRetailPrice(), product.getCategory(), product.getMemberDiscount(), product.getStockInfo(), product.getSupplierID());
-            return "addProductResult";
+            return "redirect:all";
         }
-    }
-
-    @GetMapping("/delete")
-    public String deleteProductFormGet(Model model){
-        model.addAttribute("product", new Product());
-        return "deleteProduct";
     }
 
     @PostMapping("/delete")
-    public String deleteProductFormPost(@ModelAttribute @Valid Product product, BindingResult bindingResult){
-        if (bindingResult.hasErrors()) {    //if inputs are not valid
-            return "deleteProduct";
-        } else {
-            String sql = "DELETE FROM chaonengquan.Product WHERE id = ?";
-            jdbcTemplate.update(sql, product.getId());
-            return "deleteProductResult";
-        }
+    public String deleteProductFormPost(@ModelAttribute Product product) {
+        String sql = "DELETE FROM chaonengquan.Product WHERE id = ?";
+        jdbcTemplate.update(sql, product.getId());
+        return "redirect:all";
     }
 
 
     @GetMapping("/update")
-    public String updateFormGet(Model model){
-        model.addAttribute("product", new Product());
+    public String updateFormGet(@ModelAttribute Product toUpdate, Model model) {
+        model.addAttribute("toUpdate", toUpdate);
         return "updateProduct";
     }
 
     @PostMapping("/update")
-    public String updateFormPost(@ModelAttribute @Valid Product product, BindingResult bindingResult){
+    public String updateFormPost(@ModelAttribute @Valid Product product, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {    //if inputs are not valid
             return "updateProduct";
         } else {
             String sql = "UPDATE chaonengquan.Product SET Name = ? , RetailPrice = ?, Category = ?, MemberDiscount = ?, StockInfo = ?, SupplierID = ? WHERE id = ?";
             jdbcTemplate.update(sql, product.getName(), product.getRetailPrice(), product.getCategory(), product.getMemberDiscount(), product.getStockInfo(), product.getSupplierID(), product.getId());
-            return "updateProductResult";
+            return "redirect:all";
         }
     }
 
 
     @GetMapping("/all")
     public String getAllProduct(Model model) {
+        model.addAttribute("toAdd", new Product()); //for later insertion
+
         List<Product> allProduct = this.jdbcTemplate.query(
                 "select * from chaonengquan.Product",
                 (rs, rowNum) -> {
