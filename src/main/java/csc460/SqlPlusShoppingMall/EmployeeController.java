@@ -1,7 +1,6 @@
 package csc460.SqlPlusShoppingMall;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
@@ -88,7 +87,7 @@ public class EmployeeController {
                     }
                 });
         model.addAttribute("employeeList", allEmployee);
-        return "allEmployeeResult";
+        return "allEmployee";
     }
 
 

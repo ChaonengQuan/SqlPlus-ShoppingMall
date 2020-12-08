@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import javax.validation.Valid;
-import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -86,7 +85,7 @@ public class ProductController {
                     return product;
                 });
         model.addAttribute("allProduct", allProduct);
-        return "allProductResult";
+        return "allProduct";
     }
 
 

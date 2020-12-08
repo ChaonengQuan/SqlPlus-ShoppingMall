@@ -10,11 +10,10 @@
 <body>
 <center>
     <h1>Update a supplier in the table</h1>
-    <form action="#" th:action="@{/supplier/update}" th:object="${supplier}" method="post">
-        <p>Supplier ID: <input type="number" th:field="*{id}"/></p>
-        <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Supplier ID Error</p>
+    <form action="#" th:action="@{/supplier/update}" th:object="${toUpdate}" method="post">
+        <input type="hidden" name="id" th:value="${toUpdate.id}">
 
-        <p>Supplier Name: <input type="text" th:field="*{name}"/></p>
+        <p>Supplier Name: <input type="text" th:field="*{name}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Supplier Name Error</p>
 
         <p>Restock Date: <input type="date" th:field="*{restockDate}"/></p>

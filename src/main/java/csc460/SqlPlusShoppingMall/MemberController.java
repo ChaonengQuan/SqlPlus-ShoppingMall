@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import javax.validation.Valid;
-import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -85,7 +84,7 @@ public class MemberController {
                     return member;
                 });
         model.addAttribute("allMember", allMember);
-        return "allMemberResult";
+        return "allMember";
     }
 
 

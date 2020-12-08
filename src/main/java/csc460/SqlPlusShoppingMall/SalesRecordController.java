@@ -73,7 +73,7 @@ public class SalesRecordController {
                     return salesRecord;
                 });
         model.addAttribute("salesRecordList", salesRecordList);
-        return "allSalesRecordResult";
+        return "allSalesRecord";
     }
 
 
