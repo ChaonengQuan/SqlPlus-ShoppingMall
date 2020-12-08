@@ -40,6 +40,8 @@
     </table>
 
     <br>
+    <hr>
+    <br>
 
     <form th:action="@{/salesRecord/add}" th:object="${toAdd}" method="post">
 
@@ -50,6 +52,8 @@
         Member ID: <input type="number" th:field="*{memberID}"/>
         <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Sales Record ID Error</p>
 
+        <br>
+        <br>
         <button type="submit">Insert</button>
     </form>
 
