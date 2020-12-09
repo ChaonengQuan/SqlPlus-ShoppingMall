@@ -17,9 +17,9 @@
             <th>Name</th>
             <th>Profit</th>
         </tr>
-        <tr th:each="product : ${query3List}">
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.profit}"></td>
+        <tr>
+            <td th:text="${query3List[0].name}"></td>
+            <td th:text="${query3List[0].profit}"></td>
     </table>
 
     <br>
