@@ -45,11 +45,11 @@
 
     <form th:action="@{/salesRecord/add}" th:object="${toAdd}" method="post">
 
-        ID: <input type="number" th:field="*{id}"/>
+        ID: <input type="number" th:field="*{id}" required/>
         Order Date: <input type="date" th:field="*{orderDate}"/>
         Payment Method: <input type="text" th:field="*{paymentMethod}"/>
         Total Amount: <input type="number" step="0.01" th:field="*{totalAmount}"/>
-        Member ID: <input type="number" th:field="*{memberID}"/>
+        Member ID: <input type="number" th:field="*{memberID}" required/>
         <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Sales Record ID Error</p>
 
         <br>

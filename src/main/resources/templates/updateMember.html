@@ -20,12 +20,12 @@
         <p>Last Name: <input type="text" th:field="*{lastName}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</p>
 
-        <p>Date of Birth: <input type="date" th:field="*{dateOfBirth}"/></p>
+        <p>Date of Birth: <input type="date" value="" th:field="*{dateOfBirth}"/></p>
         <p>Address: <input type="text" th:field="*{address}"/></p>
-        <p>Phone: <input type="number" th:field="*{phone}" required/></p>
+        <p>Phone: <input type="number" placeholder="" th:field="*{phone}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</p>
 
-        <p>Reward Point: <input type="number" th:field="*{rewardPoint}"/></p>
+        <p>Reward Point: <input type="number" placeholder="" th:field="*{rewardPoint}"/></p>
         <p>Membership Paid: <input type="text" th:field="*{membershipPaid}"/></p>
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
     </form>

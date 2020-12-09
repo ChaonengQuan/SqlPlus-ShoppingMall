@@ -16,10 +16,10 @@
         <p>Supplier Name: <input type="text" th:field="*{name}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Supplier Name Error</p>
 
-        <p>Restock Date: <input type="date" th:field="*{restockDate}"/></p>
+        <p>Restock Date: <input type="date" th:field="*{restockDate}" required></p>
         <p>Supply Price: <input type="number" th:field="*{supplyPrice}"/></p>
         <p>Amount: <input type="number" th:field="*{amount}"/></p>
-        <p>Product ID: <input type="text" th:field="*{productID}"/></p>
+        <p>Product ID: <input type="number" value="0" th:field="*{productID}"/> (Enter 0 for NULL)</p>
 
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
     </form>

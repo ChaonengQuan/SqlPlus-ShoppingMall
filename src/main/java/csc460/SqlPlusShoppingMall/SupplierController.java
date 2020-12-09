@@ -30,8 +30,14 @@ public class SupplierController {
 
     @PostMapping("/add")
     public String addSupplierFormPost(@ModelAttribute Supplier toAdd) {
-        String sql = "INSERT INTO chaonengquan.Supplier (id, Name, RestockDate, SupplyPrice, Amount, ProductID) VALUES (?, ?, ? ,? ,? ,?)";
-        jdbcTemplate.update(sql, toAdd.getId(), toAdd.getName(), toAdd.getRestockDate(), toAdd.getSupplyPrice(), toAdd.getAmount(), toAdd.getProductID());
+
+        if (toAdd.getProductID() == 0) {
+            String sql = "INSERT INTO chaonengquan.Supplier (id, Name, RestockDate, SupplyPrice, Amount, ProductID) VALUES (?, ?, ? ,? ,?, NULL)";
+            jdbcTemplate.update(sql, toAdd.getId(), toAdd.getName(), toAdd.getRestockDate(), toAdd.getSupplyPrice(), toAdd.getAmount());
+        } else {
+            String sql = "INSERT INTO chaonengquan.Supplier (id, Name, RestockDate, SupplyPrice, Amount, ProductID) VALUES (?, ?, ? ,? ,? ,?)";
+            jdbcTemplate.update(sql, toAdd.getId(), toAdd.getName(), toAdd.getRestockDate(), toAdd.getSupplyPrice(), toAdd.getAmount(), toAdd.getProductID());
+        }
         return "redirect:all";
     }
 

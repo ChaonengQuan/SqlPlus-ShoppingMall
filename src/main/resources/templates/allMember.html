@@ -53,10 +53,10 @@
         ID: <input type="number" th:field="*{id}" required/>
         First Name: <input type="text" th:field="*{firstName}" required/>
         Last Name: <input type="text" th:field="*{lastName}" required/><br><br>
-        Date of Birth: <input type="date" th:field="*{dateOfBirth}"/>
+        Date of Birth: <input type="date" value="" th:field="*{dateOfBirth}"/>
         Address: <input type="text" th:field="*{address}"/>
-        Phone: <input type="number" th:field="*{phone}" required/>
-        Reward Point: <input type="number" th:field="*{rewardPoint}"/>
+        Phone: <input type="number" placeholder="" th:field="*{phone}" required/>
+        Reward Point: <input type="number"  placeholder="" th:field="*{rewardPoint}"/>
         Membership Paid: <input type="text" th:field="*{membershipPaid}"/>
 
         <p class="input_error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</p>

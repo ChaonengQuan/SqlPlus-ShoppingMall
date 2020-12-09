@@ -5,13 +5,15 @@
 ALTER TABLE chaonengquan.SalesRecord
 ADD CONSTRAINT fk_member
   FOREIGN KEY (MemberId)
-  REFERENCES chaonengquan.Member(id);
+  REFERENCES chaonengquan.Member(id)
+  ON DELETE CASCADE;
 
 --Product FK
 ALTER TABLE chaonengquan.Product
 ADD CONSTRAINT fk_supplier
   FOREIGN KEY (SupplierId)
-  REFERENCES chaonengquan.Supplier(id);
+  REFERENCES chaonengquan.Supplier(id)
+  ON DELETE CASCADE;
 
 
 --OrderItem PK

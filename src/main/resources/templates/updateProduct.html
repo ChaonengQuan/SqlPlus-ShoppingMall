@@ -14,14 +14,14 @@
 
         <input type="hidden" name="id" th:value="${toUpdate.id}">
 
-        <p>Product Name: <input type="text" th:field="*{name}"/></p>
+        <p>Product Name: <input type="text" th:field="*{name}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Product Name Error</p>
 
         <p>Retail Price: <input type="number" step="0.01" th:field="*{retailPrice}"/></p>
         <p>Category: <input type="text" th:field="*{category}"/></p>
         <p>Member Discount: <input type="number" th:field="*{memberDiscount}"/></p>
         <p>Stock Info: <input type="text" th:field="*{stockInfo}"/></p>
-        <p>Supplier ID: <input type="number" th:field="*{supplierID}"/></p>
+        <p>Supplier ID: <input type="number" value="0" th:field="*{supplierID}"/> (Enter 0 for NULL)</p>
 
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
     </form>
