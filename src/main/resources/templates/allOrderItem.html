@@ -12,6 +12,7 @@
     <h3> Current order item in the table OrderItem</h3>
     <table>
         <tr>
+            <th>ID</th>
             <th>SalesRecordId</th>
             <th>ProductId</th>
             <th>Paid Price</th>
@@ -19,20 +20,19 @@
             <th>Operation</th>
         </tr>
         <tr th:each="orderItem : ${orderItemList}">
+            <td th:text="${orderItem.id}"></td>
             <td th:text="${orderItem.salesRecordId}"></td>
             <td th:text="${orderItem.productId}"></td>
             <td th:text="${orderItem.paidPrice}"></td>
             <td th:text="${orderItem.quantity}"></td>
             <td>
                 <form th:action="@{/orderItem/delete}" th:object="${orderItem}" method="post">
-                    <input type="hidden" name="salesRecordId" th:value="${orderItem.salesRecordId}">
-                    <input type="hidden" name="productId" th:value="${orderItem.productId}">
+                    <input type="hidden" name="id" th:value="${orderItem.id}">
                     <button type="submit">Delete</button>
                 </form>
 
                 <form th:action="@{/orderItem/update}" th:object="${orderItem}" method="get">
-                    <input type="hidden" name="salesRecordId" th:value="${orderItem.salesRecordId}">
-                    <input type="hidden" name="productId" th:value="${orderItem.productId}">
+                    <input type="hidden" name="id" th:value="${orderItem.id}">
                     <button type="submit">Update</button>
                 </form>
             </td>
@@ -44,6 +44,7 @@
     <br>
 
     <form th:action="@{/orderItem/add}" th:object="${toAdd}" method="post">
+        ID: <input type="number" th:field="*{toAdd.id}" required/>
         SalesRecordId: <input type="number" th:field="*{salesRecordId}" required/>
         ProductId: <input type="number" th:field="*{productId}" required/>
         Paid Price: <input type="number" step="0.01" th:field="*{paidPrice}"/>

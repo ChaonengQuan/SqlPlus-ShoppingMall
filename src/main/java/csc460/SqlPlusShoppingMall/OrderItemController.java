@@ -33,16 +33,16 @@ public class OrderItemController {
     //Add
     @PostMapping("/add")
     public String addOrderItem(@ModelAttribute OrderItem toAdd) {
-        String sql = "INSERT INTO chaonengquan.OrderItem (SalesRecordID, ProductID, PaidPrice, Quantity) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, toAdd.getSalesRecordId(), toAdd.getProductId(), toAdd.getPaidPrice(), toAdd.getQuantity());
+        String sql = "INSERT INTO chaonengquan.OrderItem (id, SalesRecordID, ProductID, PaidPrice, Quantity) VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, toAdd.getId(), toAdd.getSalesRecordId(), toAdd.getProductId(), toAdd.getPaidPrice(), toAdd.getQuantity());
         return "redirect:all";
     }
 
     //Delete
     @PostMapping("/delete")
     public String deleteOrderItem(@ModelAttribute OrderItem toDelete) {
-        String sql = "DELETE FROM chaonengquan.OrderItem WHERE SalesRecordId = ? AND ProductId = ?";
-        jdbcTemplate.update(sql, toDelete.getSalesRecordId(), toDelete.getProductId());
+        String sql = "DELETE FROM chaonengquan.OrderItem WHERE id = ?";
+        jdbcTemplate.update(sql, toDelete.getId());
         return "redirect:all";
     }
 
@@ -55,8 +55,8 @@ public class OrderItemController {
 
     @PostMapping("/update")
     public String updateOrderItem(@ModelAttribute OrderItem toUpdate) {
-        String sql = "UPDATE chaonengquan.OrderItem SET PaidPrice = ?, Quantity = ? WHERE SalesRecordId = ? AND ProductId = ?";
-        jdbcTemplate.update(sql, toUpdate.getPaidPrice(), toUpdate.getQuantity(), toUpdate.getSalesRecordId(), toUpdate.getProductId());
+        String sql = "UPDATE chaonengquan.OrderItem SET SalesRecordId = ?, ProductId = ?, PaidPrice = ?, Quantity = ? WHERE id = ?";
+        jdbcTemplate.update(sql, toUpdate.getSalesRecordId(), toUpdate.getProductId(), toUpdate.getPaidPrice(), toUpdate.getQuantity(), toUpdate.getId());
         return "redirect:all";
     }
 
@@ -70,6 +70,7 @@ public class OrderItemController {
                 new RowMapper<OrderItem>() {
                     public OrderItem mapRow(ResultSet rs, int rowNum) throws SQLException {
                         OrderItem orderItem = new OrderItem();
+                        orderItem.setId(rs.getLong("id"));
                         orderItem.setSalesRecordId(rs.getLong("SalesRecordId"));
                         orderItem.setProductId(rs.getLong("ProductId"));
                         orderItem.setPaidPrice(rs.getFloat("PaidPrice"));
