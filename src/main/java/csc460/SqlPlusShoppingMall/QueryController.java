@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -26,15 +24,20 @@ public class QueryController {
 
 
     /**
-     *Write a query that displays the member by searching the phone number or the ID. The results should
+     * Write a query that displays the member by searching the phone number or the ID. The results should
      * display the member name, date of birth, and reward points
      */
-    @PostMapping("/1")
-    public String query1(Model model){
+    @GetMapping("/1")
+    public String query1(@RequestParam Integer memberId, @RequestParam Integer phone, Model model) {
+        if (memberId == 0)
+            memberId = -12345;
+        if (phone == 0)
+            phone = -56789;
 
+        String sql = String.format("SELECT * FROM chaonengquan.Member WHERE id = %d OR Phone = %d", memberId, phone);
+        //System.out.println("sql is :"+sql);
 
-        List<Member> memberList = this.jdbcTemplate.query(
-                "SELECT * FROM chaonengquan.Supplier WHERE id = ? OR Phone = ?",
+        List<Member> memberList = this.jdbcTemplate.query(sql,
                 (rs, rowNum) -> {
                     Member member = new Member();
                     member.setId(rs.getLong("id"));
@@ -49,22 +52,43 @@ public class QueryController {
                 });
 
         model.addAttribute("memberList", memberList);
-        return "hello";
+        return "query1";
     }
 
-    @PostMapping("/3")
-    public String query3(Model model){
-        System.out.println("Clicked Query#3");
-        return "hello";
+    @GetMapping("/3")
+    public String query3(Model model) {
+
+        String sql = "SELECT Product.Name, (COUNT(OrderItem.ProductId) * OrderItem.Quantity *  (Product.RetailPrice - Product.MemberDiscount - Supplier.SupplyPrice)) AS Profits FROM chaonengquan.Product, chaonengquan.OrderItem, chaonengquan.Supplier WHERE Product.id = OrderItem.ProductId AND OrderItem.ProductId = Supplier.ProductId AND ROWNUM = 1 GROUP BY Product.Name, Product.RetailPrice, Product.MemberDiscount, Supplier.SupplyPrice, OrderItem.Quantity ORDER BY Profits DESC";
+
+        List<QueryObject> queryObjectList = this.jdbcTemplate.query(sql,
+                (rs, rowNum) -> {
+                    QueryObject queryObject = new QueryObject();
+                    queryObject.setName(rs.getString("name"));
+                    queryObject.setProfit(rs.getString("Profits"));
+                    return queryObject;
+                });
+
+        model.addAttribute("query3List", queryObjectList);
+        return "query3";
     }
 
-    @PostMapping("/4")
-    public String query4(Model model){
-        System.out.println("Clicked Query#4");
-        return "hello";
+    @GetMapping("/4")
+    public String query4(Model model) {
+        String sql = "SELECT Member.id, Member.FirstName, Member.LastName, SUM(SalesRecord.TotalAmount) AS Total FROM chaonengquan.Member, chaonengquan.SalesRecord WHERE Member.id = SalesRecord.MemberId AND ROWNUM <= 10 GROUP BY Member.id, Member.FirstName, Member.LastName ORDER BY Total DESC";
+
+        List<QueryObject> queryObjectList = this.jdbcTemplate.query(sql,
+                (rs, rowNum) -> {
+                    QueryObject queryObject = new QueryObject();
+                    queryObject.setId(rs.getLong("ID"));
+                    queryObject.setFirstName(rs.getString("FIRSTNAME"));
+                    queryObject.setLastName(rs.getString("LASTNAME"));
+                    queryObject.setTotal(rs.getString("TOTAL"));
+                    return queryObject;
+                });
+
+        model.addAttribute("query4List", queryObjectList);
+        return "query4";
     }
-
-
 
 
 }

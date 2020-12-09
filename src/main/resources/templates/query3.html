@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Query#3 Result</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<center>
+    <h3> Query#3 Result</h3>
+
+    <h4>The Most Profitable Product</h4>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Profit</th>
+        </tr>
+        <tr th:each="product : ${query3List}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.profit}"></td>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <a href="/index.html">Home</a>
+
+
+</center>
+</body>
+
+</html>
