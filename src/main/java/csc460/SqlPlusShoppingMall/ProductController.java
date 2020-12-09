@@ -33,7 +33,7 @@ public class ProductController {
         if (bindingResult.hasErrors()) {    //if inputs are not valid
             return "redirect:all";
         } else {
-            if (product.getSupplierID() == -1) {  //use -1 to present NULL
+            if (product.getSupplierID() == 0) {  //use 0 to present NULL
                 String sql = "INSERT INTO chaonengquan.Product (id, Name, RetailPrice, Category, MemberDiscount, StockInfo, SupplierID) VALUES (?, ?, ? ,? ,? ,?, NULL)";
                 jdbcTemplate.update(sql, product.getId(), product.getName(), product.getRetailPrice(), product.getCategory(), product.getMemberDiscount(), product.getStockInfo());
             } else {

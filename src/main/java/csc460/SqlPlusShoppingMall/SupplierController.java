@@ -31,7 +31,7 @@ public class SupplierController {
     @PostMapping("/add")
     public String addSupplierFormPost(@ModelAttribute Supplier toAdd) {
 
-        if (toAdd.getProductID() == -1) {
+        if (toAdd.getProductID() == 0) {
             String sql = "INSERT INTO chaonengquan.Supplier (id, Name, RestockDate, SupplyPrice, Amount, ProductID) VALUES (?, ?, ? ,? ,?, NULL)";
             jdbcTemplate.update(sql, toAdd.getId(), toAdd.getName(), toAdd.getRestockDate(), toAdd.getSupplyPrice(), toAdd.getAmount());
         } else {

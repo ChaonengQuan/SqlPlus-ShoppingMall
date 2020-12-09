@@ -20,7 +20,7 @@
         <p>Last Name: <input type="text" th:field="*{lastName}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</p>
 
-        <p>Date of Birth: <input type="date" value="" th:field="*{dateOfBirth}" required/></p>
+        <p>Date of Birth: <input type="date" value="" th:field="*{dateOfBirth}"/></p>
         <p>Address: <input type="text" th:field="*{address}"/></p>
         <p>Phone: <input type="number" placeholder="" th:field="*{phone}" required/></p>
         <p class="input_error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</p>
