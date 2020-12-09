@@ -49,13 +49,13 @@
 
     <form th:action="@{/product/add}" th:object="${toAdd}" method="post">
 
-        ID: <input type="number" th:field="*{id}"/>
-        Name: <input type="text" th:field="*{name}"/>
+        ID: <input type="number" th:field="*{id}" required/>
+        Name: <input type="text" th:field="*{name}" required/>
         Retail Price: <input type="number" step="0.01" th:field="*{retailPrice}"/><br><br>
         Category: <input type="text" th:field="*{category}"/>
         Member Discount: <input type="number" th:field="*{memberDiscount}"/>
         Stock Info: <input type="text" th:field="*{stockInfo}"/>
-        Supplier ID: <input type="number" th:field="*{supplierID}"/>
+        Supplier ID: <input type="number" value="-1" th:field="*{supplierID}"/> (Enter -1 for NULL)
 
         <p class="input_error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Product ID Error</p>
         <p class="input_error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Product Name Error</p>

@@ -34,7 +34,7 @@ public class ProductController {
             return "redirect:all";
         } else {
             if (product.getSupplierID() == -1) {  //use -1 to present NULL
-                String sql = "INSERT INTO chaonengquan.Product (id, Name, RetailPrice, Category, MemberDiscount, StockInfo, NULL) VALUES (?, ?, ? ,? ,? ,?)";
+                String sql = "INSERT INTO chaonengquan.Product (id, Name, RetailPrice, Category, MemberDiscount, StockInfo, SupplierID) VALUES (?, ?, ? ,? ,? ,?, NULL)";
                 jdbcTemplate.update(sql, product.getId(), product.getName(), product.getRetailPrice(), product.getCategory(), product.getMemberDiscount(), product.getStockInfo());
             } else {
                 String sql = "INSERT INTO chaonengquan.Product (id, Name, RetailPrice, Category, MemberDiscount, StockInfo, SupplierID) VALUES (?, ?, ? ,? ,? ,? ,?)";

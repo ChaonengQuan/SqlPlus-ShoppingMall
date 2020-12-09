@@ -32,7 +32,7 @@ public class SupplierController {
     public String addSupplierFormPost(@ModelAttribute Supplier toAdd) {
 
         if (toAdd.getProductID() == -1) {
-            String sql = "INSERT INTO chaonengquan.Supplier (id, Name, RestockDate, SupplyPrice, Amount, NULL) VALUES (?, ?, ? ,? ,?)";
+            String sql = "INSERT INTO chaonengquan.Supplier (id, Name, RestockDate, SupplyPrice, Amount, ProductID) VALUES (?, ?, ? ,? ,?, NULL)";
             jdbcTemplate.update(sql, toAdd.getId(), toAdd.getName(), toAdd.getRestockDate(), toAdd.getSupplyPrice(), toAdd.getAmount());
         } else {
             String sql = "INSERT INTO chaonengquan.Supplier (id, Name, RestockDate, SupplyPrice, Amount, ProductID) VALUES (?, ?, ? ,? ,? ,?)";
