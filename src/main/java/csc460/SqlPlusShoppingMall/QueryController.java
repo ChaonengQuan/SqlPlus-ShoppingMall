@@ -29,11 +29,11 @@ public class QueryController {
      */
     @GetMapping("/1")
     public String query1(@RequestParam Integer memberId, @RequestParam Integer phone, Model model) {
-        if(memberId == 0)
+        if (memberId == 0)
             memberId = -12345;
-        if(phone == 0)
+        if (phone == 0)
             phone = -56789;
-        
+
         String sql = String.format("SELECT * FROM chaonengquan.Member WHERE id = %d OR Phone = %d", memberId, phone);
         //System.out.println("sql is :"+sql);
 
@@ -55,27 +55,16 @@ public class QueryController {
         return "query1";
     }
 
-    @PostMapping("/3")
+    @GetMapping("/3")
     public String query3(Model model) {
 
         String sql = "SELECT Product.Name, (COUNT(OrderItem.ProductId) *  (Product.RetailPrice - Product.MemberDiscount - Supplier.SupplyPrice)) AS Profits FROM chaonengquan.Product, chaonengquan.OrderItem, chaonengquan.Supplier WHERE Product.id = OrderItem.ProductId AND ROWNUM = 1 GROUP BY Product.Name, Product.RetailPrice, Product.MemberDiscount, Supplier.SupplyPrice ORDER BY Profits DESC";
-        List<Product> allProduct = this.jdbcTemplate.query(sql,
-                (rs, rowNum) -> {
-                    Product product = new Product();
-                    product.setId(rs.getLong("id"));
-                    product.setName(rs.getString("Name"));
-                    product.setRetailPrice(rs.getFloat("RetailPrice"));
-                    product.setCategory(rs.getString("Category"));
-                    product.setMemberDiscount(rs.getLong("MemberDiscount"));
-                    product.setStockInfo(rs.getString("StockInfo"));
-                    product.setSupplierID(rs.getLong("SupplierID"));
-                    return product;
-                });
-        model.addAttribute("allProduct", allProduct);
+        List<String> result = this.jdbcTemplate.query(sql, (rs, rowNum) -> rs.getString("Name") + rs.getString("Profits"));
+        model.addAttribute("result", result);
         return "query3";
     }
 
-    @PostMapping("/4")
+    @GetMapping("/4")
     public String query4(Model model) {
         String sql = "SELECT Member.id, Member.FirstName, Member.LastName, SUM(SalesRecord.TotalAmount) AS Total FROM chaonengquan.Member, chaonengquan.SalesRecord WHERE Member.id = SalesRecord.MemberId AND ROWNUM <= 10 GROUP BY Member.id, Member.FirstName, Member.LastName ORDER BY Total DESC";
 

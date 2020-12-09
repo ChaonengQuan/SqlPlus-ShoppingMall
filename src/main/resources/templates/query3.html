@@ -12,22 +12,10 @@
     <h3> Query#3 Result</h3>
     <table>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Retail Price</th>
-            <th>Category</th>
-            <th>Member Discount</th>
-            <th>StockInfo</th>
-            <th>SupplierId</th>
+            <th>The Most Profitable Product</th>
         </tr>
-        <tr th:each="product : ${allProduct}">
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.retailPrice}"></td>
-            <td th:text="${product.category}"></td>
-            <td th:text="${product.memberDiscount}"></td>
-            <td th:text="${product.stockInfo}"></td>
-            <td th:text="${product.supplierID}"></td>
+        <tr th:each="product : ${result}">
+            <td th:text="${product}"></td>
     </table>
 
     <br>
