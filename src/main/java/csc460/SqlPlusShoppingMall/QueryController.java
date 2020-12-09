@@ -58,7 +58,7 @@ public class QueryController {
     @GetMapping("/3")
     public String query3(Model model) {
 
-        String sql = "SELECT Product.Name, (COUNT(OrderItem.ProductId) * OrderItem.Quantity *  (Product.RetailPrice - Product.MemberDiscount - Supplier.SupplyPrice)) AS Profits FROM chaonengquan.Product, chaonengquan.OrderItem, chaonengquan.Supplier WHERE Product.id = OrderItem.ProductId AND OrderItem.ProductId = Supplier.ProductId AND ROWNUM = 1 GROUP BY Product.Name, Product.RetailPrice, Product.MemberDiscount, Supplier.SupplyPrice, OrderItem.Quantity ORDER BY Profits DESC";
+        String sql = "SELECT Product.Name, (COUNT(OrderItem.ProductId) * OrderItem.Quantity *  (Product.RetailPrice - Product.MemberDiscount - Supplier.SupplyPrice)) AS Profits FROM chaonengquan.Product, chaonengquan.OrderItem, chaonengquan.Supplier WHERE Product.id = OrderItem.ProductId AND OrderItem.ProductId = Supplier.ProductId GROUP BY Product.Name, Product.RetailPrice, Product.MemberDiscount, Supplier.SupplyPrice, OrderItem.Quantity ORDER BY Profits DESC";
 
         List<QueryObject> queryObjectList = this.jdbcTemplate.query(sql,
                 (rs, rowNum) -> {
