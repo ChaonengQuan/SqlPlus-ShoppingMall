@@ -35,6 +35,10 @@ public class OrderItemController {
     public String addOrderItem(@ModelAttribute OrderItem toAdd) {
         String sql = "INSERT INTO chaonengquan.OrderItem (id, SalesRecordID, ProductID, PaidPrice, Quantity) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, toAdd.getId(), toAdd.getSalesRecordId(), toAdd.getProductId(), toAdd.getPaidPrice(), toAdd.getQuantity());
+
+        String updateSql = String.format("UPDATE chaonengquan.Product SET StockInfo = (SELECT Product.StockInfo - OrderItem.Quantity FROM chaonengquan.Product, chaonengquan.OrderItem WHERE Product.Id = OrderItem.ProductId AND OrderItem.Id = %d)", toAdd.getId());
+        jdbcTemplate.execute(updateSql);
+
         return "redirect:all";
     }
 
