@@ -63,8 +63,8 @@ public class QueryController {
         List<QueryObject> queryObjectList = this.jdbcTemplate.query(sql,
                 (rs, rowNum) -> {
                     QueryObject queryObject = new QueryObject();
-                    queryObject.setName(rs.getString("Name"));
-                    queryObject.setProfit(rs.getString("Profit"));
+                    queryObject.setName(rs.getString("name"));
+                    queryObject.setProfit(rs.getString("Profits"));
                     return queryObject;
                 });
 
@@ -79,10 +79,10 @@ public class QueryController {
         List<QueryObject> queryObjectList = this.jdbcTemplate.query(sql,
                 (rs, rowNum) -> {
                     QueryObject queryObject = new QueryObject();
-                    queryObject.setId(rs.getLong("id"));
-                    queryObject.setFirstName(rs.getString("FirstName"));
-                    queryObject.setLastName(rs.getString("LastName"));
-                    queryObject.setTotal(rs.getString("Total"));
+                    queryObject.setId(rs.getLong("ID"));
+                    queryObject.setFirstName(rs.getString("FIRSTNAME"));
+                    queryObject.setLastName(rs.getString("LASTNAME"));
+                    queryObject.setTotal(rs.getString("TOTAL"));
                     return queryObject;
                 });
 

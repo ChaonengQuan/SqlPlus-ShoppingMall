@@ -10,6 +10,8 @@
 <body>
 <center>
     <h3> Query#4 Result</h3>
+
+    <h4>Top 10 customer with most money spent</h2>
     <table>
         <tr>
             <th>ID</th>
@@ -17,7 +19,7 @@
             <th>Last Name</th>
             <th>Total</th>
         </tr>
-        <tr th:each="queryObject : ${queryObjectList}">
+        <tr th:each="queryObject : ${query4List}">
             <td th:text="${queryObject.id}"></td>
             <td th:text="${queryObject.firstName}"></td>
             <td th:text="${queryObject.lastName}"></td>
