@@ -53,14 +53,13 @@
     <!-- Query#1 -->
     <div>
         <h3>Query#1: Displays the member by searching the phone number or the ID</h3>
-        <form action="/query/1" method="post">
-
-            Member ID: <input name="id" type="number">
+        <form action="/query/1">
+            Member ID: <input name="memberId" value ="0" type="number"> 
             <!--&nbsp; 1 space,  &ensp; 2 space,  &emsp; 4 space-->
             &ensp;
-            Phone: <input name="phone" type="number">
+            Phone: <input name="phone"  value ="0" type="number"> Enter 0 for NULL
             <br><br>
-            <input type="submit" value="Query#1"/>
+            <input value="Query#1" type="submit" />
         </form>
     </div>
 
@@ -69,7 +68,8 @@
     <!-- Query#3 -->
     <div>
         <h3>Query#3: Check the current the most profitable product over all the products in the database</h3>
-        <form action="/query/3" method="post">
+        <form action="/query/3">
+            Number: <input th:name="id" type="number">
             <input type="submit" value="Query#3"/>
         </form>
     </div>
@@ -79,7 +79,7 @@
     <!-- Query#4 -->
     <div>
         <h3>Query$4: Display top 10 customers with most amount of consumption</h3>
-        <form action="/query/4" method="post">
+        <form action="/query/4">
             <input type="submit" value="Query#4"/>
         </form>
     </div>

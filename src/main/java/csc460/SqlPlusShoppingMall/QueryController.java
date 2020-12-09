@@ -27,20 +27,27 @@ public class QueryController {
      * Write a query that displays the member by searching the phone number or the ID. The results should
      * display the member name, date of birth, and reward points
      */
-    @PostMapping("/1")
-    public String query1(@RequestParam(value = "id", required = false) long id,
-                         @RequestParam(value = "phone", required = false) long phone,
-                         Model model) {
+    @GetMapping("/1")
+    public String query1(@RequestParam Integer memberId, @RequestParam Integer phone, Model model) {
+        if(memberId == 0)
+            memberId = -12345;
+        if(phone == 0)
+            phone = -56789;
         
-        String sql = String.format("SELECT * FROM chaonengquan.Supplier WHERE id = %d OR Phone = %d", id, phone);
+        String sql = String.format("SELECT * FROM chaonengquan.Member WHERE id = %d OR Phone = %d", memberId, phone);
+        //System.out.println("sql is :"+sql);
 
         List<Member> memberList = this.jdbcTemplate.query(sql,
                 (rs, rowNum) -> {
                     Member member = new Member();
+                    member.setId(rs.getLong("id"));
                     member.setFirstName(rs.getString("FirstName"));
                     member.setLastName(rs.getString("LastName"));
                     member.setDateOfBirth(rs.getDate("DateOfBirth"));
+                    member.setAddress(rs.getString("Address"));
+                    member.setPhone(rs.getLong("Phone"));
                     member.setRewardPoint(rs.getLong("RewardPoint"));
+                    member.setMembershipPaid(rs.getString("MembershipPaid"));
                     return member;
                 });
 

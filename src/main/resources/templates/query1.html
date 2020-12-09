@@ -12,16 +12,24 @@
     <h3> Query#1 Result</h3>
     <table>
         <tr>
+            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Date of Birth</th>
+            <th>Address</th>
+            <th>Phone</th>
             <th>RewardPoint</th>
+            <th>Membership Paid</th>
         </tr>
-        <tr th:each="member : ${allMember}">
-            <td th:text="${member.firstName}"></td>
-            <td th:text="${member.lastName}"></td>
-            <td th:text="${member.dateOfBirth}"></td>
-            <td th:text="${member.rewardPoint}"></td>
+        <tr th:each="foundMember : ${memberList}">
+            <td th:text="${foundMember.id}"></td>
+            <td th:text="${foundMember.firstName}"></td>
+            <td th:text="${foundMember.lastName}"></td>
+            <td th:text="${foundMember.dateOfBirth}"></td>
+            <td th:text="${foundMember.address}"></td>
+            <td th:text="${foundMember.phone}"></td>
+            <td th:text="${foundMember.rewardPoint}"></td>
+            <td th:text="${foundMember.membershipPaid}"></td>
         </tr>
     </table>
 
@@ -29,9 +37,7 @@
     <hr>
     <br>
 
-    <form action="index.html">
-        <button>Home</button>
-    </form>
+    <a href="/index.html">Home</a>
 
 
 </center>
