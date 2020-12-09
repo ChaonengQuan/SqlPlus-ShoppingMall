@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Query#1 Result</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<center>
+    <h3> Query#1 Result</h3>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>RewardPoint</th>
+        </tr>
+        <tr th:each="member : ${allMember}">
+            <td th:text="${member.firstName}"></td>
+            <td th:text="${member.lastName}"></td>
+            <td th:text="${member.dateOfBirth}"></td>
+            <td th:text="${member.rewardPoint}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <form action="index.html">
+        <button>Home</button>
+    </form>
+
+
+</center>
+</body>
+
+</html>

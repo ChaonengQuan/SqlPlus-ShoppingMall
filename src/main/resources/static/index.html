@@ -54,10 +54,11 @@
     <div>
         <h3>Query#1: Displays the member by searching the phone number or the ID</h3>
         <form action="/query/1" method="post">
-            Member ID: <input type="number">
+
+            Member ID: <input name="id" type="number">
             <!--&nbsp; 1 space,  &ensp; 2 space,  &emsp; 4 space-->
             &ensp;
-            Phone: <input type="number">
+            Phone: <input name="phone" type="number">
             <br><br>
             <input type="submit" value="Query#1"/>
         </form>
