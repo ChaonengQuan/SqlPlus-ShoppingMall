@@ -57,14 +57,44 @@ public class QueryController {
 
     @PostMapping("/3")
     public String query3(Model model) {
-        System.out.println("Clicked Query#3");
-        return "hello";
+
+        String sql = "SELECT Product.Name, (COUNT(OrderItem.ProductId) *  (Product.RetailPrice - Product.MemberDiscount - Supplier.SupplyPrice)) AS Profits FROM chaonengquan.Product, chaonengquan.OrderItem, chaonengquan.Supplier WHERE Product.id = OrderItem.ProductId AND ROWNUM = 1 GROUP BY Product.Name, Product.RetailPrice, Product.MemberDiscount, Supplier.SupplyPrice ORDER BY Profits DESC";
+        List<Product> allProduct = this.jdbcTemplate.query(sql,
+                (rs, rowNum) -> {
+                    Product product = new Product();
+                    product.setId(rs.getLong("id"));
+                    product.setName(rs.getString("Name"));
+                    product.setRetailPrice(rs.getFloat("RetailPrice"));
+                    product.setCategory(rs.getString("Category"));
+                    product.setMemberDiscount(rs.getLong("MemberDiscount"));
+                    product.setStockInfo(rs.getString("StockInfo"));
+                    product.setSupplierID(rs.getLong("SupplierID"));
+                    return product;
+                });
+        model.addAttribute("allProduct", allProduct);
+        return "query3";
     }
 
     @PostMapping("/4")
     public String query4(Model model) {
-        System.out.println("Clicked Query#4");
-        return "hello";
+        String sql = "SELECT Member.id, Member.FirstName, Member.LastName, SUM(SalesRecord.TotalAmount) AS Total FROM chaonengquan.Member, chaonengquan.SalesRecord WHERE Member.id = SalesRecord.MemberId AND ROWNUM <= 10 GROUP BY Member.id, Member.FirstName, Member.LastName ORDER BY Total DESC";
+
+        List<Member> memberList = this.jdbcTemplate.query(sql,
+                (rs, rowNum) -> {
+                    Member member = new Member();
+                    member.setId(rs.getLong("id"));
+                    member.setFirstName(rs.getString("FirstName"));
+                    member.setLastName(rs.getString("LastName"));
+                    member.setDateOfBirth(rs.getDate("DateOfBirth"));
+                    member.setAddress(rs.getString("Address"));
+                    member.setPhone(rs.getLong("Phone"));
+                    member.setRewardPoint(rs.getLong("RewardPoint"));
+                    member.setMembershipPaid(rs.getString("MembershipPaid"));
+                    return member;
+                });
+
+        model.addAttribute("memberList", memberList);
+        return "query4";
     }
 
 

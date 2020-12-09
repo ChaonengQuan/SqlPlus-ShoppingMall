@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Query#4 Result</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<center>
+    <h3> Query#4 Result</h3>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>RewardPoint</th>
+            <th>Membership Paid</th>
+        </tr>
+        <tr th:each="foundMember : ${memberList}">
+            <td th:text="${foundMember.id}"></td>
+            <td th:text="${foundMember.firstName}"></td>
+            <td th:text="${foundMember.lastName}"></td>
+            <td th:text="${foundMember.dateOfBirth}"></td>
+            <td th:text="${foundMember.address}"></td>
+            <td th:text="${foundMember.phone}"></td>
+            <td th:text="${foundMember.rewardPoint}"></td>
+            <td th:text="${foundMember.membershipPaid}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <a href="/index.html">Home</a>
+
+
+</center>
+</body>
+
+</html>
