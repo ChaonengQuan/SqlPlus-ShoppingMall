@@ -1,11 +1,23 @@
 package csc460.SqlPlusShoppingMall;
 
+import javax.validation.constraints.NotNull;
+
 public class OrderItem {
 
+    @NotNull
+    private long id;
     private long salesRecordId;
     private long productId;
     private float paidPrice;
     private long quantity;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getSalesRecordId() {
         return salesRecordId;
@@ -42,7 +54,8 @@ public class OrderItem {
     @Override
     public String toString() {
         return "OrderItem{" +
-                "salesRecordId=" + salesRecordId +
+                "id=" + id +
+                ", salesRecordId=" + salesRecordId +
                 ", productId=" + productId +
                 ", paidPrice=" + paidPrice +
                 ", quantity=" + quantity +

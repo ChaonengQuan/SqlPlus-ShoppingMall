@@ -12,8 +12,9 @@
     <h1>Update a order item in the table</h1>
     <form action="#" th:action="@{/orderItem/update}" th:object="${toUpdate}" method="post">
 
-        <input type="hidden" name="salesRecordId" th:value="${toUpdate.salesRecordId}">
-        <input type="hidden" name="productId" th:value="${toUpdate.productId}">
+        <input type="hidden" name="id" th:value="${toUpdate.id}">
+        <p>SalesRecordId: <input type="number" th:field="*{salesRecordId}" required/></p>
+        <p>ProductId: <input type="number" th:field="*{productId}" required/></p>
         <p>Paid Price: <input type="number" step="0.01" th:field="*{paidPrice}"/></p>
         <P>Quantity: <input type="number" th:field="*{quantity}"/></p>
 

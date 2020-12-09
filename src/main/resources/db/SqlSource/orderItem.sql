@@ -5,10 +5,12 @@ DROP TABLE chaonengquan.OrderItem;
 
 --Create table
 CREATE TABLE chaonengquan.OrderItem(
+id          INTEGER,
 SalesRecordId		INTEGER		NOT NULL,
 ProductId		INTEGER		NOT NULL,
 PaidPrice		FLOAT,
-Quantity			INTEGER
+Quantity			INTEGER,
+PRIMARY KEY (id)
 );
 
 
