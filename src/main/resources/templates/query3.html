@@ -10,12 +10,16 @@
 <body>
 <center>
     <h3> Query#3 Result</h3>
+
+    <h4>The Most Profitable Product</h4>
     <table>
         <tr>
-            <th>The Most Profitable Product</th>
+            <th>Name</th>
+            <th>Profit</th>
         </tr>
-        <tr th:each="product : ${result}">
-            <td th:text="${product}"></td>
+        <tr th:each="product : ${query3List}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.profit}"></td>
     </table>
 
     <br>

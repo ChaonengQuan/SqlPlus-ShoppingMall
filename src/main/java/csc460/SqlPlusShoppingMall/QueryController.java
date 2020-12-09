@@ -59,8 +59,16 @@ public class QueryController {
     public String query3(Model model) {
 
         String sql = "SELECT Product.Name, (COUNT(OrderItem.ProductId) * OrderItem.Quantity *  (Product.RetailPrice - Product.MemberDiscount - Supplier.SupplyPrice)) AS Profits FROM chaonengquan.Product, chaonengquan.OrderItem, chaonengquan.Supplier WHERE Product.id = OrderItem.ProductId AND OrderItem.ProductId = Supplier.ProductId AND ROWNUM = 1 GROUP BY Product.Name, Product.RetailPrice, Product.MemberDiscount, Supplier.SupplyPrice, OrderItem.Quantity ORDER BY Profits DESC";
-        List<String> result = this.jdbcTemplate.query(sql, (rs, rowNum) -> "Name: "+rs.getString("Name") +", Profits: "+ rs.getString("Profits"));
-        model.addAttribute("result", result);
+
+        List<QueryObject> queryObjectList = this.jdbcTemplate.query(sql,
+                (rs, rowNum) -> {
+                    QueryObject queryObject = new QueryObject();
+                    queryObject.setName(rs.getString("Name"));
+                    queryObject.setProfit(rs.getString("Profit"));
+                    return queryObject;
+                });
+
+        model.addAttribute("query3List", queryObjectList);
         return "query3";
     }
 
@@ -68,21 +76,17 @@ public class QueryController {
     public String query4(Model model) {
         String sql = "SELECT Member.id, Member.FirstName, Member.LastName, SUM(SalesRecord.TotalAmount) AS Total FROM chaonengquan.Member, chaonengquan.SalesRecord WHERE Member.id = SalesRecord.MemberId AND ROWNUM <= 10 GROUP BY Member.id, Member.FirstName, Member.LastName ORDER BY Total DESC";
 
-        List<Member> memberList = this.jdbcTemplate.query(sql,
+        List<QueryObject> queryObjectList = this.jdbcTemplate.query(sql,
                 (rs, rowNum) -> {
-                    Member member = new Member();
-                    member.setId(rs.getLong("id"));
-                    member.setFirstName(rs.getString("FirstName"));
-                    member.setLastName(rs.getString("LastName"));
-                    member.setDateOfBirth(rs.getDate("DateOfBirth"));
-                    member.setAddress(rs.getString("Address"));
-                    member.setPhone(rs.getLong("Phone"));
-                    member.setRewardPoint(rs.getLong("RewardPoint"));
-                    member.setMembershipPaid(rs.getString("MembershipPaid"));
-                    return member;
+                    QueryObject queryObject = new QueryObject();
+                    queryObject.setId(rs.getLong("id"));
+                    queryObject.setFirstName(rs.getString("FirstName"));
+                    queryObject.setLastName(rs.getString("LastName"));
+                    queryObject.setTotal(rs.getString("Total"));
+                    return queryObject;
                 });
 
-        model.addAttribute("memberList", memberList);
+        model.addAttribute("query4List", queryObjectList);
         return "query4";
     }
 
