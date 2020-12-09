@@ -12,8 +12,14 @@ Then
 
 Once you see the Spring text based icon in the console, the application has successfully started
 
+Finally, open the page in your browser. The port number has been preset to 21997, you can change that in the application.properties file
+
+```localhost:21997```
+
 <br /><br />
-You need to manually install Oracle jdbc dependence if you don't have it installed, to do so
+You need to manually install Oracle jdbc dependence if you don't have it installed, make sure you have the ojdbc.jar file in the same directory
+
+then run
 
 ```./mvnw install:install-file -Dfile=ojdbc14.jar -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=11.2.0 -Dpackaging=jar```
 
