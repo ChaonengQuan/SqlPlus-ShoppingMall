@@ -33,8 +33,17 @@ public class OrderItemController {
     //Add
     @PostMapping("/add")
     public String addOrderItem(@ModelAttribute OrderItem toAdd) {
+        //Get sales price from Product table
+        String priceSql = String.format("SELECT RetailPrice FROM Product WHERE Product.id = %d", toAdd.getProductId());
+        List<Product> productList = this.jdbcTemplate.query(priceSql,
+                (rs, rowNum) -> {
+                    Product product = new Product();
+                    product.setRetailPrice(rs.getLong("RetailPrice"));
+                    return product;
+                });
+
         String sql = "INSERT INTO chaonengquan.OrderItem (id, SalesRecordID, ProductID, PaidPrice, Quantity) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, toAdd.getId(), toAdd.getSalesRecordId(), toAdd.getProductId(), toAdd.getPaidPrice(), toAdd.getQuantity());
+        jdbcTemplate.update(sql, toAdd.getId(), toAdd.getSalesRecordId(), toAdd.getProductId(), productList.get(0).getRetailPrice(), toAdd.getQuantity());
 
         //update SalesRecord totalAmount
         String updateSalesRecordSql = "UPDATE chaonengquan.SalesRecord SET TotalAmount = (SELECT SUM(OrderItem.PaidPrice * OrderItem.Quantity) FROM chaonengquan.OrderItem, chaonengquan.SalesRecord WHERE OrderItem.SalesRecordId = SalesRecord.Id)";
