@@ -39,11 +39,13 @@ public class OrderItemController {
         //update SalesRecord totalAmount
         String updateSalesRecordSql = "UPDATE chaonengquan.SalesRecord SET TotalAmount = (SELECT SUM(OrderItem.PaidPrice * OrderItem.Quantity) FROM chaonengquan.OrderItem, chaonengquan.SalesRecord WHERE OrderItem.SalesRecordId = SalesRecord.Id)";
         jdbcTemplate.execute(updateSalesRecordSql);
+        jdbcTemplate.execute("commit");
 
         //update Product stockInfo
         String updateSql = String.format("UPDATE chaonengquan.Product SET StockInfo = (SELECT Product.StockInfo - OrderItem.Quantity FROM chaonengquan.Product, chaonengquan.Orderitem WHERE Product.Id = OrderItem.ProductId AND OrderItem.Id = %d) WHERE Product.Id IN (SELECT OrderItem.ProductId FROM chaonengquan.OrderItem WHERE OrderItem.Id = %d)",
                 toAdd.getId(), toAdd.getId());
         jdbcTemplate.execute(updateSql);
+        jdbcTemplate.execute("commit");
 
         return "redirect:all";
     }
@@ -71,11 +73,13 @@ public class OrderItemController {
         //update SalesRecord totalAmount
         String updateSalesRecordSql = "UPDATE chaonengquan.SalesRecord SET TotalAmount = (SELECT SUM(OrderItem.PaidPrice * OrderItem.Quantity) FROM chaonengquan.OrderItem, chaonengquan.SalesRecord WHERE OrderItem.SalesRecordId = SalesRecord.Id)";
         jdbcTemplate.execute(updateSalesRecordSql);
+        jdbcTemplate.execute("commit");
 
         //update Product stockInfo
         String updateSql = String.format("UPDATE chaonengquan.Product SET StockInfo = (SELECT Product.StockInfo - OrderItem.Quantity FROM chaonengquan.Product, chaonengquan.Orderitem WHERE Product.Id = OrderItem.ProductId AND OrderItem.Id = %d) WHERE Product.Id IN (SELECT OrderItem.ProductId FROM chaonengquan.OrderItem WHERE OrderItem.Id = %d)",
                 toUpdate.getId(), toUpdate.getId());
         jdbcTemplate.execute(updateSql);
+        jdbcTemplate.execute("commit");
 
         return "redirect:all";
     }

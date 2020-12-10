@@ -22,15 +22,15 @@ ADD CONSTRAINT pk_OrderItem
   PRIMARY KEY (SalesRecordId, ProductId);
 
 --OrderItem FKs
-ALTER TABLE chaonengquan.OrderItem
-ADD CONSTRAINT fk_SalesRecordId
-  FOREIGN KEY (SalesRecordId)
-  REFERENCES chaonengquan.SalesRecord(id);
-
-ALTER TABLE chaonengquan.OrderItem
-ADD CONSTRAINT fk_ProductId
-  FOREIGN KEY (ProductId)
-  REFERENCES chaonengquan.Product(id);
+-- ALTER TABLE chaonengquan.OrderItem
+-- ADD CONSTRAINT fk_SalesRecordId
+--   FOREIGN KEY (SalesRecordId)
+--   REFERENCES chaonengquan.SalesRecord(id);
+--
+-- ALTER TABLE chaonengquan.OrderItem
+-- ADD CONSTRAINT fk_ProductId
+--   FOREIGN KEY (ProductId)
+--   REFERENCES chaonengquan.Product(id);
 
 --Supplier FK
 ALTER TABLE chaonengquan.Supplier
