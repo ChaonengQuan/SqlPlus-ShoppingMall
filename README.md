@@ -33,3 +33,9 @@ To execute required queries, just click on the button corresponds to the query.
 
 # Workload Distribution
 Both team members' workload are about 50%
+
+# E-R diagram and Normalization analysis
+![E-R diagram and Normalization analysis](./doc/analysis.jpg)
+![E-R diagram and Normalization analysis](./doc/analysis2.jpg)
+![E-R diagram and Normalization analysis](./doc/analysis3.jpg)
+![E-R diagram and Normalization analysis](./doc/analysis4.jpg)
